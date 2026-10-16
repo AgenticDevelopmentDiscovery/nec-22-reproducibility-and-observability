@@ -1,99 +1,86 @@
-# nel-course
+# Tutorial 22 — Reproducibility, Logging & Observability for Agent Runs
 
-A template for **evolving a document by critique**: one artifact, one Markdown
-source, three outputs, improved one round at a time by a panel of independent
-reviewers whose findings are reconciled into a single ranked docket.
+A 15-minute ENGR 689 tutorial with a runnable offline symbolic-regression agent. Capture a manifest, replay candidate evaluations, locate an input-induced divergence, and preserve failed candidates and equation ancestry.
 
-Clone it, replace the content in `sections/`, and run `/round`.
+## Read or present
 
-> **[CLAUDE.md](CLAUDE.md) is the method.** How a round works, why the reviewers
-> are independent, what the two registers of a section are for, and the
-> guardrails — all of it lives there, in one file. This README only covers
-> getting the toolchain running and starting a project.
+- [Topic and learning objectives](topic.md)
+- [Context](sections/01-context.prose.md)
+- [Motivation](sections/02-motivation.prose.md)
+- [Worked example](sections/03-content.prose.md)
+- [Conclusion and further reading](sections/04-conclusion.prose.md)
+- [15-minute presenter notes](presenter-notes.md)
+- [Demo commands and expected results](demo/README.md)
+- [Observed verification results](demo/verification.md)
 
----
+Each section's `.concepts.md` companion records claims, decisions, and open questions. The prose is shared by the document, presentation, and website; each `##` heading becomes a slide. Bibliography entries live in `references.bib`.
 
-## What you get
+## Run the demo
 
+Python 3.10 or later, standard library only. From the repository root:
+
+```sh
+python demo/run.py run --out demo/runs/original
+python demo/run.py replay demo/runs/original/manifest.json --out demo/runs/replay
+python demo/run.py compare demo/runs/original demo/runs/replay
+python demo/run.py corrupt demo/runs/original/manifest.json --out demo/runs/changed
+python demo/run.py compare demo/runs/original demo/runs/changed
 ```
-sections/           the source — one pair of files per section
-personas/           the reviewer panel, plus the aggregator
-rounds/             committed critique history: one folder per round
-site/               the website's template and stylesheet
-figures/            figures, referenced from the prose
-topic.md            the proposal — what this tutorial is and promises
-metadata.yaml       title, authors, and the declared audience
-justfile            every build recipe
+
+The first comparison matches all five candidate steps. The second detects the intentional change at step 1 and returns exit code 1. Each run keeps the failed `1 / x` candidate and its partial predictions.
+
+Use fresh output directories when repeating the demo. For Windows interpreter paths and the precise replay contract, see [demo/README.md](demo/README.md).
+
+```sh
+python -m unittest discover -s demo -v
 ```
 
-| | Command | Output |
-| --- | --- | --- |
-| Document | `just doc` | `output/document.pdf` |
-| Presentation | `just slides` | `output/slides.pdf` |
-| Website | `just site` | `_site/index.html` |
+## Build the three outputs
 
-`just build` makes all three. `just serve` previews the site locally.
+The build uses `just`, Pandoc, XeLaTeX, and a POSIX shell. These are now installed in this computer's **Ubuntu-20.04 WSL environment**. From a PowerShell terminal in this repository, rebuild with:
 
-## Setup
-
-Install the toolchain. On macOS:
-
+```powershell
+wsl -d Ubuntu-20.04 -- just build
 ```
+
+Open `output/document.pdf` or `output/slides.pdf` in Windows Explorer after building. The tools are installed inside WSL; typing `just` directly in PowerShell will not invoke them. The Python demo remains independent of the document toolchain.
+
+For installation on another computer, follow the platform instructions below.
+
+On macOS:
+
+```sh
 brew install pandoc just librsvg
 brew install --cask mactex-no-gui
 ```
 
-On Debian or Ubuntu:
+On Debian/Ubuntu, install [just](https://just.systems/man/en/pre-built-binaries.html) and a current [Pandoc](https://pandoc.org/installing.html) release. Ubuntu 20.04's Pandoc package is too old for this build's `--citeproc` option. Install the TeX dependencies with:
 
-```
-sudo apt-get install -y pandoc just texlive-xetex texlive-latex-extra \
-                        texlive-fonts-recommended librsvg2-bin
-```
-
-Then confirm it works before changing anything:
-
-```
-just build
+```sh
+sudo apt-get install -y texlive-xetex texlive-latex-extra \
+  texlive-fonts-recommended lmodern librsvg2-bin
 ```
 
-The placeholder content renders, so a failure here is a toolchain problem, not
-your writing.
+The slide metadata uses the Metropolis Beamer theme. Confirm it is installed with the TeX packages.
 
-## Start your project
+| Command | Output |
+| --- | --- |
+| `just doc` | `output/document.pdf` |
+| `just slides` | `output/slides.pdf` |
+| `just site` | `_site/index.html`, with both PDFs linked |
+| `just build` | All three |
+| `just serve` | Website preview at localhost:8000 |
 
-1. **Say what you are doing.** Fill in [topic.md](topic.md) — the proposal: what
-   the topic is, why it belongs in this course, what the reader will be able to
-   do afterwards, and what is out of scope. Every reviewer reads it, and the
-   panel judges the tutorial against it.
-2. **Declare your reader.** Edit [metadata.yaml](metadata.yaml) — the title, the
-   authors, and especially `audience`. The pedagogy reviewer judges the document
-   against whatever you write there, so a vague audience buys you a vague review.
-3. **Write.** Replace the placeholders in `sections/`. Each section is a pair:
-   `<name>.prose.md` ships, `<name>.concepts.md` holds the spine behind it.
-   Section order is the numeric filename prefix — add a section by adding a
-   numbered pair.
-4. **Check it renders.** `just build`.
-5. **Run a round.** `/round` in Claude Code. It produces a ranked docket at
-   `rounds/round-NNN/SYNTHESIS.md` and stops; you decide what to act on.
+The build has been verified in WSL: the document has **6 pages** and the presentation has **22 pages**, including the title, section dividers, and references. Slide previews were inspected and clipped content was shortened. Inspect the slides again after future edits; the build itself does not reject overfull frames.
 
-## Publishing
+Installed versions: `just 1.58.0`, `pandoc 3.11`, and XeLaTeX from TeX Live 2019 (Ubuntu 20.04). The Metropolis theme currently uses fallback fonts because its optional Fira fonts are absent; the PDFs render successfully.
 
-The site deploys to GitHub Pages on demand — never automatically on push.
+## Review and publishing
 
-One-time, in the repository settings: **Settings -> Pages -> Source: GitHub
-Actions**. Then:
+[CLAUDE.md](CLAUDE.md) describes the document's critique process. A review round produces a docket in `rounds/`; editing follows separately. Past rounds are preserved. No review round has been run for this draft.
 
-```
-git push
-just deploy
-```
+Publishing is a separate explicit action. The existing GitHub Pages workflow builds the committed version on demand through `just deploy`; it is not automatically triggered by a push. Nothing has been committed or deployed as part of authoring this tutorial.
 
-CI installs the toolchain and runs `just build`, so it publishes exactly what
-`just serve` showed you. Nothing generated is stored in git.
+## Framework origin
 
-## Derived from
-
-The `nel-operator` engine, reduced to its teaching core. The section-pair
-convention, the reviewer-panel critic, and the never-reverted single manuscript
-come from there; the compile and metrics gates, the archive, the scaffolder, and
-the unattended loop deliberately do not.
+The repository uses the nel-course document template, derived from nel-operator: one manuscript with paired prose/concept files, an independent reviewer panel, and accumulated critique history.

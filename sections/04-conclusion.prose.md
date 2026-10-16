@@ -1,33 +1,21 @@
 # Conclusion
 
-<!-- Every `##` becomes one slide. One idea each. -->
+## Before you call a result reproducible
 
-## What you can do now
+You can now capture an experiment, re-execute it, compare candidate outcomes, find an input-induced divergence, and retain failures alongside successful equations.
 
-> The recap, stated as capability rather than as summary. Not "we covered X" —
-> rather, what the reader can now do that they could not before.
->
-> Keep it to what the tutorial actually delivered. This paragraph and
-> § What this tutorial covers must agree exactly; the panel will check.
+For the next agent run, check:
 
-Replace this paragraph.
+- Are the actual inputs and code available, as well as their hashes?
+- Is “same result” defined, and does the comparison enforce it?
+- Can every attempted candidate and the winning artifact be traced?
 
-## Where to go next
+**Exit question:** The winner is unchanged, but an early candidate's score differs. Is replay successful? **No under our contract:** the ordered evaluation outcomes must also match.
 
-> The next thing to learn, and why it is the next one. Name the specific
-> resource, tool, or topic and say what it adds.
->
-> Order matters more than length. Three pointers in a sensible sequence beat a
-> list of ten a reader has to triage themselves.
+## Extend one boundary at a time
 
-Replace this paragraph.
+Start with OpenTelemetry's traces documentation to map local operations into nested spans. [@oteltraces] Then use the W3C provenance overview to distinguish artifacts, producing activities, and responsible agents. [@w3cprov]
 
-## Open edges
+Read PyTorch's reproducibility notes for a concrete account of runtime and platform limits, even if your eventual agent uses another backend. [@pytorchrepro]
 
-> What is still unsettled — where the tool is changing, where practice has not
-> converged, where you would not yet give firm advice.
->
-> End on the opening you leave, not on a restatement. A tutorial that admits its
-> edges is more trustworthy than one that implies the topic is finished.
-
-Replace this paragraph.
+The next experiment is replacing the offline proposer with your course agent while keeping the manifest and comparison contract. Whether that system supports exact re-execution, recorded-response replay, or only distributional agreement remains an empirical question.

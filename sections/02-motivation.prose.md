@@ -1,35 +1,20 @@
 # Motivation
 
-<!-- Every `##` becomes one slide. One idea each. -->
+## A winning equation is not enough evidence
 
-## Why it matters for agentic development
+Suppose yesterday's winner was $x^2+1$ with mean squared error zero. Today its score is $0.2$. Did the agent change, the scoring tool change, or one target value change?
 
-> The case, made concretely. What does this tool, technique, or notion let an
-> agentic system do that is hard or impossible without it?
->
-> Tie it to agentic development specifically — not to software in general. If the
-> answer would read the same for any programming topic, you have not made the
-> case yet.
+A final score cannot distinguish those explanations. The saved dataset and per-candidate trace can: our demo changes one target from 5 to 6, and the first candidate's score changes from 13.8 to 16.8.
 
-Replace this paragraph.
+For the course, these records connect reproducible repositories (C1), auditable fitness scores (C2), recorded retrieval context (C3), and visible failures (C4).
 
-## What goes wrong without it
+## Find the moving inputs
 
-> The failure it prevents, shown rather than asserted. A concrete situation that
-> goes badly, and how it goes badly.
->
-> This is the paragraph that makes the tutorial worth reading. A reader who has
-> felt the failure will follow you through the mechanics; one who has not will
-> skim. Use a real case if you have one.
+| Source of variation | Preserve or control |
+| --- | --- |
+| Model sampling | Model version, decoding settings, seed if supported, request and response |
+| Tools and retrieval | Arguments, results, retrieved content and order, corpus snapshot |
+| Code and data | Code snapshot/commit, dependencies, dataset, hashes |
+| Concurrency and time | Ordering, environment, deadlines, time-dependent inputs |
 
-Replace this paragraph.
-
-## When to reach for it
-
-> The bounds, stated by you rather than discovered by a frustrated reader. What
-> it is good for, and — just as important — when it is the wrong tool.
->
-> A technique with honestly stated limits is more usable than one presented as
-> universal, because the reader can tell whether their situation is in scope.
-
-Replace this paragraph.
+The demo removes external services and executes serially. Real runs need records at every boundary that can change. A hash detects changed content; it cannot recover missing content.

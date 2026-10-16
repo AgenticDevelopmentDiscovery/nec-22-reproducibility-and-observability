@@ -1,28 +1,20 @@
 # Motivation — spine
 
-> Note form only; never rendered. See `01-context.concepts.md` for what each
-> heading is for.
-
-## Purpose
-
-Say WHY the topic is important for agentic development, and bound where it
-applies.
-
 ## Claims
 
-> Here these are the value claims: what it buys, what it prevents, where it stops
-> being the right tool. Each one should be something a reader could disagree with.
-
-- (claim)
+- One changed target can change fitness while preserving the winning equation.
+- Sampling, tools, retrieval, code, concurrency, and time can change a run.
+- Hashes identify snapshots; hashes alone cannot restore them.
 
 ## Decisions
 
-- (decision — and what it was chosen over)
+- Use the exact dataset perturbation from the executable demo.
+- Map evidence to C1-C4 without claiming an integration.
 
 ## Open questions
 
-- (question)
+- Course tool and retrieval interfaces have not been provided.
 
 ## Not doing
 
-- (excluded, and why)
+- Vendor selection and pricing; not needed for the learning objective.

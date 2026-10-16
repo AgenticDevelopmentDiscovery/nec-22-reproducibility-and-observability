@@ -1,32 +1,25 @@
 # Content — spine
 
-> Note form only; never rendered. See `01-context.concepts.md` for what each
-> heading is for.
-
-## Purpose
-
-Teach the HOW: the mental model, then worked use, then the failure modes — so
-the reader can use the tool on a case this tutorial never showed them.
-
 ## Claims
 
-> Here these are what the reader should be able to do after this section, one
-> capability per line. State them as actions, not as topics covered.
-
-- (claim)
+- Manifest snapshots and code checks constrain replay.
+- Every attempted candidate has a completed-step record, including division by zero.
+- Ordered outcome comparison catches divergence even if the winner stays the same.
+- Candidate ancestry and span nesting describe different relationships.
 
 ## Decisions
 
-> Which cases you chose to walk through and what you rejected. This is the
-> highest-value part of the sidecar for a tutorial: the choice of example is the
-> teaching, and it is the choice a team relitigates most often.
-
-- (decision — and what it was chosen over)
+- Five serial candidates; score feedback selects the incumbent.
+- Use a real arithmetic failure, not a simulated timeout.
+- Retain partial predictions and null score for failed evaluation.
+- Compare semantic outcomes while excluding execution IDs and timing.
+- Keep detailed shell instructions outside rendered slide units.
 
 ## Open questions
 
-- (question)
+- Production timeouts, crash recovery, and statistical equivalence need separate implementations.
+- Further content edits will require another slide-fit check.
 
 ## Not doing
 
-- (excluded, and why)
+- Live LLM calls, tracing backends, full evolutionary search, and hidden model reasoning.

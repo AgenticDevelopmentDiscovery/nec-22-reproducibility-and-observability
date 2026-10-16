@@ -1,28 +1,19 @@
 # Conclusion — spine
 
-> Note form only; never rendered. See `01-context.concepts.md` for what each
-> heading is for.
-
-## Purpose
-
-Say what the reader can now do, point at what comes next, and name what is still
-open.
-
 ## Claims
 
-- (claim)
+- Replay evidence must include intermediate outcomes and failures.
+- A winner's provenance does not establish its scientific validity.
 
 ## Decisions
 
-- (decision — and what it was chosen over)
+- Use a changed-intermediate-score exit question.
+- Order next reading: traces, provenance, runtime limits.
 
 ## Open questions
 
-> Overlaps with § Open edges in the prose — but this list is for the team, and
-> that section is for the reader. Not everything here is ready to ship there.
-
-- (question)
+- The course agent's reproducibility contract must be tested after integration.
 
 ## Not doing
 
-- (excluded, and why)
+- Claims that the offline example guarantees live model determinism.

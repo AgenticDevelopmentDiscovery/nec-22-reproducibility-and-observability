@@ -2,6 +2,8 @@
 # none of it belongs in git.
 output/
 _site/
+demo/runs/
+__pycache__/
 
 # LaTeX intermediates, if you ever run an engine by hand.
 *.aux
