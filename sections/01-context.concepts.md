@@ -2,19 +2,21 @@
 
 ## Claims
 
-- Reproducibility needs a comparison contract, not just a seed.
-- Observability records execution; provenance links artifacts to origins.
-- Live re-execution and replaying recorded responses support different claims.
+- Correct output alone does not establish reproducibility or reliability.
+- Logging produces records; observability requires enough connected evidence to investigate behavior.
+- Reproducibility requires a comparison rule; provenance connects results to origins.
 
 ## Decisions
 
-- Define the three terms before motivation.
-- Use a dependency-free offline proposer to isolate instrumentation.
+- Open with the concrete missing-actions problem and Q1 before terminology, as requested.
+- Separate the question from its answer with Beamer overlays; keep both in article/HTML.
+- Replace the former three-concept table with four concise definitions.
+- Keep the replay contract at replay, avoiding repetition in the opening.
 
 ## Open questions
 
-- Live-model behavior remains unmeasured.
+- Class discussion length needs an actual presenter rehearsal.
 
 ## Not doing
 
-- A historical survey; the session needs definitions and a worked case.
+- A historical survey, or claims that logs reveal hidden model reasoning.

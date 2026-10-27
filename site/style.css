@@ -102,6 +102,9 @@ main h1 {
 }
 main h2 { font-size: 1.18rem; margin: 2rem 0 .5rem; }
 main h3 { font-size: 1.02rem; margin: 1.5rem 0 .4rem; }
+.question .prompt { font-size: 1.15rem; font-weight: 600; }
+.answer { border-left: 3px solid var(--accent); padding-left: 1rem; margin: 1rem 0; }
+.detail { margin: 1rem 0 1.5rem; }
 main p { margin: 0 0 1rem; }
 main blockquote {
   margin: 1.2rem 0; padding: .7rem 1.1rem;

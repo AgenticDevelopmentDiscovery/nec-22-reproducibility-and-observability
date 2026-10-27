@@ -1,21 +1,46 @@
 # Context
 
-## Three questions about one agent run
+## A correct answer is only the beginning {#s01}
 
-An agent proposes an equation, calls a scoring tool, and uses the score to choose its next proposal.
+An agent returns a convincing result. Its intermediate actions are missing.
 
-| Question | Evidence |
+::: {.question}
+**ASK THE CLASS**
+
+:::: {.prompt}
+If an AI agent produces the correct final answer, do we still need to know how it got there?
+::::
+
+- **A.** No, the correct final result is all that matters.
+- **B.** Yes: to verify inputs, reproduce execution, or investigate unexpected behavior.
+- **C.** Only when the agent produces an incorrect answer.
+:::
+
+::: {.answer}
+**ANSWER — B is strongest for our experiments**
+
+- A correct output does not establish reproducibility or reliability.
+- We need evidence about inputs, actions, and failures.
+- Today: capture a run, replay it, and explain a difference.
+:::
+
+::: {.detail}
+An equation that fits yesterday's observations might receive a different score today. The final equation alone cannot tell us whether the data, code, or evaluation changed. Our offline example makes those alternatives inspectable without requiring an API key.
+:::
+
+## Four ideas, four different jobs {#s02}
+
+| Idea | What it gives us |
 | --- | --- |
-| Can we repeat the result? | **Reproducibility:** preserved inputs and a stated comparison rule. |
-| What actually happened? | **Observability:** recorded operations, outputs, and failures. |
-| Where did the result come from? | **Provenance:** links to data, configuration, and parent candidates. |
+| **Logging** | Events, inputs, outputs, errors |
+| **Observability** | Evidence to investigate behavior |
+| **Reproducibility** | Re-execution under a contract |
+| **Provenance** | Links to inputs, code, ancestors |
 
-Provenance describes how an artifact was produced; it does not prove that the artifact is correct. [@w3cprov]
+A log says “candidate failed.” Connected records show **which run, which input, and where**. [@otelprimer]
 
-## State what “same” means
+::: {.detail}
+Logging is an activity; observability is the ability those records help provide. Structured logs use consistent fields, so we can connect an error to a candidate, the candidate to its run, and that run to its input snapshot. More log lines alone do not guarantee useful observability. Traces organize operations; metrics summarize behavior across operations.
 
-For this tutorial, replay means **re-executing** the saved offline agent on the saved dataset and configuration. We compare candidate order, equations, predictions, scores, errors, and the selected result. New run IDs, timestamps, and durations are expected.
-
-Replaying recorded model responses tests downstream behavior. Calling a live model again tests a different claim. A seed alone does not establish repeatability across software versions or platforms. [@pytorchrepro]
-
-Our demo uses a small rule-based agent with no API calls. It isolates the recording and debugging method.
+Reproducibility asks whether a repeat execution meets a defined contract. Provenance asks where an artifact came from. An inspectable failure can have excellent provenance even when it cannot be reproduced. Neither a trace nor a provenance chain proves that an equation is scientifically correct. [@w3cprov]
+:::

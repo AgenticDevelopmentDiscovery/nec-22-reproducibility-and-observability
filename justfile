@@ -17,7 +17,7 @@ engine := "xelatex"
 open   := "open"
 
 # Shared across all three outputs.
-common := "--metadata-file=metadata.yaml --resource-path=.:figures --citeproc --bibliography=references.bib"
+common := "--metadata-file=metadata.yaml --resource-path=.:figures --lua-filter=filters/tutorial.lua --citeproc --bibliography=references.bib"
 
 # Print available recipes (default).
 default:

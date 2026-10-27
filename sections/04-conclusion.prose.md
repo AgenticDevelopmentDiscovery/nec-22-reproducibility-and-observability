@@ -1,21 +1,54 @@
-# Conclusion
+# Applications and conclusion
 
-## Before you call a result reproducible
+## Carry the evidence into a live agent {#s13}
 
-You can now capture an experiment, re-execute it, compare candidate outcomes, find an input-induced divergence, and retain failures alongside successful equations.
+- Save visible model requests/responses and tool inputs/outputs.
+- Preserve model/settings, code, environment, and retrieved content.
+- Define what “same” means **before** comparing runs.
+- If exact re-execution is unavailable, evaluate repeated-run behavior.
 
-For the next agent run, check:
+**A seed alone is not a reproducibility guarantee.** [@pytorchrepro]
 
-- Are the actual inputs and code available, as well as their hashes?
-- Is “same result” defined, and does the comparison enforce it?
-- Can every attempted candidate and the winning artifact be traced?
+::: {.detail}
+Sources of variation include sampling, changing tool outputs, retrieval over a changing corpus, scheduling, time, and runtime versions. Preserve the actual snapshots as well as their hashes. Capture the rendered prompt and retrieval order; hidden model reasoning is neither required nor generally available.
 
-**Exit question:** The winner is unchanged, but an early candidate's score differs. Is replay successful? **No under our contract:** the ordered evaluation outcomes must also match.
+Replaying saved model responses tests downstream behavior. Calling the live model again tests a different claim. For distributional agreement, choose a metric, tolerance, and repeated-run protocol before running the experiment. One matching execution is not statistical evidence.
 
-## Extend one boundary at a time
+The offline demo is intentionally smaller than a production framework. Real systems need appropriate access controls/redaction, retention policies, start/end events for interrupted work, recovery, and explicit retry/timeout policies. These are extensions, not features claimed by the example.
+:::
 
-Start with OpenTelemetry's traces documentation to map local operations into nested spans. [@oteltraces] Then use the W3C provenance overview to distinguish artifacts, producing activities, and responsible agents. [@w3cprov]
+## Where would you use these records? {#s14}
 
-Read PyTorch's reproducibility notes for a concrete account of runtime and platform limits, even if your eventual agent uses another backend. [@pytorchrepro]
+| AI coding agents | Engineering simulations |
+| --- | --- |
+| Tool calls and code revisions | Input files and material properties |
+| Test outcomes and failed attempts | Solver settings and model versions |
+| Execution/revision history | Evaluation outcomes and run history |
 
-The next experiment is replacing the offline proposer with your course agent while keeping the manifest and comparison contract. Whether that system supports exact re-execution, recorded-response replay, or only distributional agreement remains an empirical question.
+**Coding:** Which edit broke the tests?
+
+**Simulation:** Did the result change because of the physics inputs or solver settings?
+
+::: {.detail}
+A coding-agent trace can associate a tool call with a code diff, test command, and failed attempt, making an unexpected edit easier to investigate. A simulation run can connect an output artifact to the input deck, material model, mesh, solver configuration, software version, and evaluation result. Repeating a simulation also requires its relevant software and numerical environment.
+
+These examples transfer the same recording principles; they do not imply our offline search implements a production coding or simulation platform. The course connections remain C1 (reproducible repositories), C2 (auditable fitness), C3 (retrieval context), and C4 (visible failures).
+
+The same principles extend to robotics, medical AI, and other systems with multi-step execution, where domain-specific validation is also necessary.
+:::
+
+## Keep the evidence, not just the winner {#s15}
+
+Before claiming reproducibility:
+
+1. Preserve the actual inputs, configuration, and code.
+2. Re-execute and compare intermediate outcomes as well as the result.
+3. Keep failures and links to each artifact's origin.
+
+**The final answer shows what was produced. The records let us investigate how, repeat the execution, and explain differences.**
+
+::: {.detail}
+Optional closing check: if two runs share the same winning equation, were the runs identical? No. Their data, intermediate scores, failures, or execution histories can differ. In our controlled example, both runs selected $x^2+1$, yet the first candidate's score and the winner's score changed.
+
+For further reading, start with OpenTelemetry's observability primer and traces documentation, then W3C's provenance overview, and finally the PyTorch reproducibility notes for a concrete discussion of runtime limits. [@otelprimer; @oteltraces; @w3cprov; @pytorchrepro]
+:::

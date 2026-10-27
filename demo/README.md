@@ -4,23 +4,37 @@ This is a Python-standard-library demo: no packages, credentials, or network cal
 
 ## Run the complete experiment
 
-Execute from the repository root. Each output directory must be new.
+Execute each command **individually from the repository root**. Each output directory must be new. These classroom names are reserved for presentation; validation uses separately named runs. No WSL, Pandoc, or just is required for this Python demo.
 
-```sh
-python demo/run.py run --out demo/runs/original
-python demo/run.py replay demo/runs/original/manifest.json --out demo/runs/replay
-python demo/run.py compare demo/runs/original demo/runs/replay
-python demo/run.py corrupt demo/runs/original/manifest.json --out demo/runs/changed
-python demo/run.py compare demo/runs/original demo/runs/changed
+```powershell
+python demo/run.py run --out demo/runs/class-original
+```
+
+```powershell
+python demo/run.py replay demo/runs/class-original/manifest.json --out demo/runs/class-replay
+```
+
+```powershell
+python demo/run.py compare demo/runs/class-original demo/runs/class-replay
+```
+
+```powershell
+python demo/run.py corrupt demo/runs/class-original/manifest.json --out demo/runs/class-changed
+```
+
+```powershell
+python demo/run.py compare demo/runs/class-original demo/runs/class-changed
 ```
 
 On macOS/Linux, use `python3` if that is your Python command. On Windows, use `py -3` if configured. If neither command finds the interpreter, invoke the installed executable; for this workspace:
 
 ```powershell
-& "$env:LOCALAPPDATA\Programs\Python\Python312\python.exe" demo/run.py run --out demo/runs/original
+& "$env:LOCALAPPDATA\Programs\Python\Python312\python.exe" demo/run.py run --out demo/runs/class-original
 ```
 
 Use the same interpreter for all five commands. To repeat the presentation, choose a new set of directory names and adjust every command consistently; the script refuses to replace earlier evidence.
+
+The [presenter guide](../presenter-notes.md) provides the timing, spoken explanations, question/reveal cues, expected output, and exact files to display for every action.
 
 ## Expected observations
 
@@ -61,7 +75,7 @@ The comparator checks dataset/config/code/runtime identity, all ordered semantic
 If the repository code later changes, run the recorded source with its recorded Python version:
 
 ```sh
-python demo/runs/original/agent.py replay demo/runs/original/manifest.json --out demo/runs/from-snapshot
+python demo/runs/class-original/agent.py replay demo/runs/class-original/manifest.json --out demo/runs/from-snapshot
 ```
 
 ## Tests and boundaries

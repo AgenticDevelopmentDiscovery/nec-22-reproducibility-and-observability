@@ -2,14 +2,22 @@
 title: "Reproducibility, Logging & Observability for Agent Runs"
 subtitle: "Tutorial 22: replay a search, explain a divergence, trace a result"
 # Author names are omitted until supplied by the team.
-date: "2026-09-09"
+date: "2026-10-27"
 reference-section-title: References
 audience: >-
-  ENGR 689 students who can read basic Python and JSON and understand an agent's
-  propose-evaluate loop, but have not instrumented one. After this 15-minute
+  ENGR 689 students who can read basic Python and JSON but are unfamiliar with
+  agent observability. The propose-evaluate loop and MSE are introduced here.
+  After this 15-minute
   tutorial they can capture a run manifest, compare replayed candidate scores,
   locate an input-induced divergence, and preserve failed evaluations.
 theme: metropolis
+# Keep the section structure, but omit standalone divider pages in the deck.
+themeoptions:
+  - sectionpage=none
+section-titles: false
+# Wrap long article commands without shrinking the type or changing the command.
+header-includes:
+  - '\usepackage{fvextra}'
 aspectratio: 169
 colorlinks: true
 linkcolor: NavyBlue

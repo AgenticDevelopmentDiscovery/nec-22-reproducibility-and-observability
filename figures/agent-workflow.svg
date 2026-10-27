@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="230" viewBox="0 0 1100 230" role="img" aria-labelledby="title desc">
+<title id="title">Rule-based symbolic regression loop</title><desc id="desc">Propose a candidate, evaluate predictions, score MSE or error, select the best valid incumbent, and feed back to the next proposal.</desc>
+<defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8 Z" fill="#315a63"/></marker></defs>
+<rect width="1100" height="230" fill="#ffffff"/>
+<g font-family="DejaVu Sans, sans-serif" font-size="29" fill="#23383d"><rect x="15" y="25" width="230" height="100" rx="7" fill="#f2f6f6" stroke="#315a63" stroke-width="2"/>
+<text x="130" y="65" text-anchor="middle" font-weight="bold">Propose</text>
+<text x="130" y="102" text-anchor="middle" font-size="23">candidate equation</text>
+<line x1="250" y1="75" x2="288" y2="75" stroke="#315a63" stroke-width="2.5" marker-end="url(#arrow)"/>
+<rect x="295" y="25" width="230" height="100" rx="7" fill="#f2f6f6" stroke="#315a63" stroke-width="2"/>
+<text x="410" y="65" text-anchor="middle" font-weight="bold">Evaluate</text>
+<text x="410" y="102" text-anchor="middle" font-size="23">predicted values</text>
+<line x1="530" y1="75" x2="568" y2="75" stroke="#315a63" stroke-width="2.5" marker-end="url(#arrow)"/>
+<rect x="575" y="25" width="230" height="100" rx="7" fill="#f2f6f6" stroke="#315a63" stroke-width="2"/>
+<text x="690" y="65" text-anchor="middle" font-weight="bold">Score</text>
+<text x="690" y="102" text-anchor="middle" font-size="23">MSE or error</text>
+<line x1="810" y1="75" x2="848" y2="75" stroke="#315a63" stroke-width="2.5" marker-end="url(#arrow)"/>
+<rect x="855" y="25" width="230" height="100" rx="7" fill="#f2f6f6" stroke="#315a63" stroke-width="2"/>
+<text x="970" y="65" text-anchor="middle" font-weight="bold">Select</text>
+<text x="970" y="102" text-anchor="middle" font-size="23">keep best valid</text>
+<path d="M970 130 V175 H130 V133" fill="none" stroke="#315a63" stroke-width="2.5" marker-end="url(#arrow)"/><text x="550" y="212" text-anchor="middle" font-size="25">Incumbent and recorded seed guide the next proposal</text>
+</g></svg>

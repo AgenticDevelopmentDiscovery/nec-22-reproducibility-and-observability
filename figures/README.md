@@ -16,7 +16,7 @@ projector, and on a high-DPI screen. Use PNG for screenshots and photographs,
 nothing else.
 
 > **SVG in the PDF outputs needs `rsvg-convert`.** The website uses SVG directly,
-> but pandoc has to rasterize it for LaTeX. If `just doc` fails with
+> but pandoc has to convert it to PDF for LaTeX. If `just doc` fails with
 > *"check that rsvg-convert is in path"*, install it:
 > `brew install librsvg` (macOS) or `apt-get install librsvg2-bin` (Debian).
 > CI already has it. A PDF figure needs no converter at all, but will not display
@@ -28,7 +28,16 @@ The `visual` reviewer does not count figures. It asks whether each one makes a
 relationship visible that the prose leaves abstract, and it will tell you to
 delete any figure that merely decorates.
 
-This template ships with **no figures**, so expect the first round to say so.
-The most valuable one in most tutorials shows the mental model in
-§ Content § How it works — the boxes, the arrows, the one relationship the prose
-leaves abstract. If you add only one, add that.
+## Tutorial figures
+
+The five editable SVG assets use a restrained teal/gray palette and large labels. They are embedded from the shared manuscript and copied into the website; each includes an accessible title and description.
+
+| Asset | Teaching purpose |
+| --- | --- |
+| `agent-workflow.svg` | Propose, evaluate, score, select, and feed back the incumbent |
+| `experiment-records.svg` | Three complementary records associated with one run, not file execution stages |
+| `replay-comparison.svg` | All five recomputed candidate outcomes, including the matching failure |
+| `controlled-divergence.svg` | One changed target, first score divergence, same winning equation |
+| `equation-lineage.svg` | Verified parent-to-child chain, with notes about the other two attempts |
+
+The numbers and ancestry correspond to seed 7 in the unchanged Python demo. If the experiment changes, verify these labels against actual records before editing them. Temporary PDF inspection PNGs belong outside the repository; they are not tutorial assets.

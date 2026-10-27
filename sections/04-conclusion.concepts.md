@@ -1,19 +1,23 @@
-# Conclusion — spine
+# Applications and conclusion — spine
 
 ## Claims
 
-- Replay evidence must include intermediate outcomes and failures.
-- A winner's provenance does not establish its scientific validity.
+- Intermediate outcomes and failures matter even when the winner is unchanged.
+- Coding agents and simulation agents can preserve analogous evidence.
+- A seed alone does not guarantee repeatability of live model/tool/retrieval execution.
 
 ## Decisions
 
-- Use a changed-intermediate-score exit question.
-- Order next reading: traces, provenance, runtime limits.
+- Keep transfer limitations concise; move production detail into manuscript and notes.
+- Use one applications slide for code revisions/tests and simulation inputs/solver settings.
+- Finish with three practical checks and one takeaway.
+- Treat the optional closing question as a spoken check, not another slide.
 
 ## Open questions
 
-- The course agent's reproducibility contract must be tested after integration.
+- A live course agent's repeatability must be measured after integration.
+- The 15-minute budget has not been validated by a live timed rehearsal.
 
 ## Not doing
 
-- Claims that the offline example guarantees live model determinism.
+- Additional application surveys, or treating the offline demo as production-grade.

@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="290" viewBox="0 0 1100 290" role="img" aria-labelledby="title desc">
+<title id="title">Original and recomputed replay outcomes</title><desc id="desc">All five candidate records match under the comparison contract. Both executions score 13.8, 1.0, 0.0, error, and 1.0.</desc>
+<defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8 Z" fill="#315a63"/></marker></defs>
+<rect width="1100" height="290" fill="#ffffff"/>
+<g font-family="DejaVu Sans, sans-serif" font-size="29" fill="#23383d"><text x="15" y="90" font-weight="bold">Original</text>
+<text x="15" y="155" font-weight="bold">Replay</text>
+<text x="300" y="35" text-anchor="middle" font-weight="bold">c001</text>
+<text x="300" y="90" text-anchor="middle">13.8</text>
+<text x="300" y="155" text-anchor="middle">13.8</text>
+<text x="300" y="210" text-anchor="middle" font-size="24">match</text>
+<text x="470" y="35" text-anchor="middle" font-weight="bold">c002</text>
+<text x="470" y="90" text-anchor="middle">1.0</text>
+<text x="470" y="155" text-anchor="middle">1.0</text>
+<text x="470" y="210" text-anchor="middle" font-size="24">match</text>
+<text x="640" y="35" text-anchor="middle" font-weight="bold">c003</text>
+<text x="640" y="90" text-anchor="middle">0.0</text>
+<text x="640" y="155" text-anchor="middle">0.0</text>
+<text x="640" y="210" text-anchor="middle" font-size="24">match</text>
+<text x="810" y="35" text-anchor="middle" font-weight="bold">c004</text>
+<text x="810" y="90" text-anchor="middle">error</text>
+<text x="810" y="155" text-anchor="middle">error</text>
+<text x="810" y="210" text-anchor="middle" font-size="24">match</text>
+<text x="980" y="35" text-anchor="middle" font-weight="bold">c005</text>
+<text x="980" y="90" text-anchor="middle">1.0</text>
+<text x="980" y="155" text-anchor="middle">1.0</text>
+<text x="980" y="210" text-anchor="middle" font-size="24">match</text>
+<line x1="210" y1="110" x2="1080" y2="110" stroke="#315a63" stroke-width="2.5"/>
+<text x="550" y="267" text-anchor="middle" font-weight="bold">Recomputed outcomes — five of five records match</text>
+</g></svg>

@@ -6,26 +6,28 @@ A 15-minute ENGR 689 tutorial with a runnable offline symbolic-regression agent.
 
 - [Topic and learning objectives](topic.md)
 - [Context](sections/01-context.prose.md)
-- [Motivation](sections/02-motivation.prose.md)
+- [Workflow, MSE, and experiment records](sections/02-motivation.prose.md)
 - [Worked example](sections/03-content.prose.md)
 - [Conclusion and further reading](sections/04-conclusion.prose.md)
 - [15-minute presenter notes](presenter-notes.md)
 - [Demo commands and expected results](demo/README.md)
 - [Observed verification results](demo/verification.md)
+- [Refinement assessment and teaching decisions](docs/refinement-review.md)
+- [Final command-slide review](docs/finalization-review.md)
 
 Each section's `.concepts.md` companion records claims, decisions, and open questions. The prose is shared by the document, presentation, and website; each `##` heading becomes a slide. Bibliography entries live in `references.bib`.
+
+The revised lesson has four **ASK THE CLASS** moments: correct answers (S01), missing evidence (S05), changed MSE (S09), and failed candidates (S11). In the slide PDF, advance one page to reveal each answer. The document and website include both the question and solution, plus detailed explanations.
 
 ## Run the demo
 
 Python 3.10 or later, standard library only. From the repository root:
 
 ```sh
-python demo/run.py run --out demo/runs/original
-python demo/run.py replay demo/runs/original/manifest.json --out demo/runs/replay
-python demo/run.py compare demo/runs/original demo/runs/replay
-python demo/run.py corrupt demo/runs/original/manifest.json --out demo/runs/changed
-python demo/run.py compare demo/runs/original demo/runs/changed
+python demo/run.py run --out demo/runs/class-original
 ```
+
+Then execute the remaining four commands **individually** from [demo/README.md](demo/README.md) or the [presenter guide](presenter-notes.md). All commands use the repository root as their working directory.
 
 The first comparison matches all five candidate steps. The second detects the intentional change at step 1 and returns exit code 1. Each run keeps the failed `1 / x` candidate and its partial predictions.
 
@@ -71,15 +73,25 @@ The slide metadata uses the Metropolis Beamer theme. Confirm it is installed wit
 | `just build` | All three |
 | `just serve` | Website preview at localhost:8000 |
 
-The build has been verified in WSL: the document has **6 pages** and the presentation has **22 pages**, including the title, section dividers, and references. Slide previews were inspected and clipped content was shortened. Inspect the slides again after future edits; the build itself does not reject overfull frames.
+The revised deck has **17 instructional frames**, including two short command frames, with four additional answer-reveal pages. All five live commands are visible: original execution on S07, replay/comparison on S08, and controlled change/comparison on S10. The result diagrams follow on S08-results and S10-results. It omits standalone section-divider pages while retaining the Metropolis theme. See [verification](demo/verification.md) for the final PDF page counts and inspection results. Inspect the slides again after future edits; the build itself does not reject overfull frames.
 
 Installed versions: `just 1.58.0`, `pandoc 3.11`, and XeLaTeX from TeX Live 2019 (Ubuntu 20.04). The Metropolis theme currently uses fallback fonts because its optional Fira fonts are absent; the PDFs render successfully.
 
 ## Review and publishing
 
+### Editing the shared manuscript
+
+Keep the existing `##` heading-to-slide structure. The source IDs `s01`–`s15`, `s08-results`, and `s10-results` match the presenter guide. `filters/tutorial.lua` provides three small output differences:
+
+- `.question` and `.answer` divisions occupy overlays 1 and 2 in Beamer. The article and website retain both in order.
+- `.detail` divisions provide supplementary explanations and calculations in the article and website, and are omitted from the slides. The five demo commands stay outside these divisions.
+- PowerShell command blocks wrap in the article using `fvextra`, so long paths remain readable without reducing the font size. Longer slide commands use PowerShell continuation lines; the presenter guide also keeps one-line copies.
+
+The `.prompt` division enlarges and bolds a projected question. Add or revise content in the paired source files, not the generated PDFs or `_site/`. Five editable SVG diagrams live in `figures/`. Inspection PNGs are stored outside the repository in the temporary directory.
+
 [CLAUDE.md](CLAUDE.md) describes the document's critique process. A review round produces a docket in `rounds/`; editing follows separately. Past rounds are preserved. No review round has been run for this draft.
 
-Publishing is a separate explicit action. The existing GitHub Pages workflow builds the committed version on demand through `just deploy`; it is not automatically triggered by a push. Nothing has been committed or deployed as part of authoring this tutorial.
+Website publishing is a separate explicit action. The existing GitHub Pages workflow builds the committed version on demand through `just deploy`; it is not automatically triggered by a push. Tutorial source changes are maintained on `Elias.dev`; pushing that branch does not merge into `main` or deploy the site. Generated PDFs, website files, and demonstration runs are ignored and rebuilt locally.
 
 ## Framework origin
 

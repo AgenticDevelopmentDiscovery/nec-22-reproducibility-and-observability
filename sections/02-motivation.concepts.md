@@ -1,20 +1,24 @@
-# Motivation — spine
+# Experiment preparation — spine
 
 ## Claims
 
-- One changed target can change fitness while preserving the winning equation.
-- Sampling, tools, retrieval, code, concurrency, and time can change a run.
-- Hashes identify snapshots; hashes alone cannot restore them.
+- Symbolic regression seeks an equation fitting observations.
+- The offline policy uses deterministic rules and a seeded offset, with incumbent feedback.
+- MSE zero establishes exact fit to the recorded dataset, not generalization.
+- Saving only a winner loses essential execution evidence.
 
 ## Decisions
 
-- Use the exact dataset perturbation from the executable demo.
-- Map evidence to C1-C4 without claiming an integration.
+- Retain the existing section pair; teach workflow and scoring before artifact formats.
+- Q2 is open-ended and occurs before the live demonstration.
+- Use one workflow diagram, the five-point dataset, and a small score table.
+- Associate three records through a common run ID; do not depict files as executable pipeline stages.
+- Put detailed arithmetic and schema descriptions in manuscript-only detail blocks.
 
 ## Open questions
 
-- Course tool and retrieval interfaces have not been provided.
+- The actual C2 harness interface has not been provided; this remains a teaching stand-in.
 
 ## Not doing
 
-- Vendor selection and pricing; not needed for the learning objective.
+- General symbolic-regression optimization or independent LLM proposal generation.
