@@ -12,7 +12,7 @@
 title: "Reproducibility and Observability for AI Agents"
 subtitle: "Making an agent's run re-creatable and its decisions inspectable"
 author:
-  - Russell Oplinger
+  - Elias Lynch & Russell Oplinger
 date: \today
 
 # Where `--citeproc` puts the reference list. Without this the bibliography is

@@ -1,4 +1,56 @@
-# Context
+## A Correct Answer is Only the Beginning
+
+An agent returns a convincing result. Its intermediate actions are missing.
+
+::: {.question}
+
+:::: {.prompt}
+If an AI agent produces the correct final answer, do we still need to know how it got there?
+::::
+
+- **A.** No, the correct final result is all that matters.
+- **B.** Yes: to verify inputs, reproduce execution, or investigate unexpected behavior.
+- **C.** Only when the agent produces an incorrect answer.
+:::
+
+## A Correct Answer is Only the Beginning
+
+::: {.answer}
+**ANSWER — B is strongest for our experiments**
+
+- A correct output does not establish reproducibility or reliability.
+- We need evidence about inputs, actions, and failures.
+- Today: capture a run, replay it, and explain a difference.
+:::
+
+::: {.detail}
+An equation that fits yesterday's observations might receive a different score today. The final equation alone cannot tell us whether the data, code, or evaluation changed. Our offline example makes those alternatives inspectable without requiring an API key.
+:::
+
+## Why it matters for agentic development
+
+Ordinary programs are deterministic: the same input produces the same output,
+so a stack trace or a debugger reliably points at the cause of a failure. 
+
+An agent breaks that guarantee in three ways at once:
+
+- The model *samples* its output, so asking it the same question twice can give two different answers even with nothing else changed. 
+- A tool it calls — a web search, a retrieval index, another service — can return a different result on the next call regardless of what the agent does.
+- The agent's real output is the product of a *chain* of such calls, so the step that actually went wrong is often several steps upstream of the one where the wrong answer became visible.
+
+Observability and reproducibility exist to answer exactly the question a stack trace answers for ordinary code, for a system where that trick no longer works.
+
+## What goes wrong without it
+ 
+ Without a trace, the output is the entire evidence: one cannot
+see what the agent searched for, what the search actually returned, or which
+part of the returned text the model misread. 
+
+- One can only re-run the agent on a similar-sounding question and hope to hit the same failure, which a non-deterministic model may simply not reproduce for you.
+- Without a stored trace to compare against, there is no way to check whether a change made a class of failure more or less common — only an impression, formed from whichever cases happened to be
+noticed. 
+
+An agent operating without observability is a system whose only debugging signal is what a user happened to report, and whose only evidence for whether a change helped is how the team feels about it afterward.
 
 ## Observability
 
@@ -21,33 +73,3 @@ drove the run.
 
 Reproducibility answers "can I make that happen again on purpose?" so a
 proposed fix can be checked rather than guessed at.
-
-## Where it came from
-
-Both ideas are older than agents. Observability is borrowed directly from
-distributed systems: once an application became a graph of services calling
-each other over a network, a single log file was no longer enough to explain a
-failure, and engineers built traces that follow one request across every
-service it touched. Reproducibility echoes a concern from computational
-science, where a result is only as trustworthy as the pipeline's ability to
-produce it again from the same inputs. AI agents inherited both problems at
-once, and made them harder: an agent's "services" are calls to a model that
-*samples* its output rather than computing it deterministically, its "network"
-includes tools whose results can change between calls, and a wrong final
-answer is frequently the visible symptom of a wrong decision several steps
-upstream — exactly the situation distributed tracing was built to untangle.
-
-## What this tutorial covers
-
-This tutorial builds the mental model of a trace as a tree of spans, then walks
-through the concrete levers for making an agent run reproducible and their real
-limits, then works a single example: diagnosing a multi-step agent's failure
-from its trace instead of from its final output alone. It closes with the
-pitfalls that make instrumentation backfire — logging sensitive data into a
-trace, instrumenting so heavily that no one reads the result, and mistaking a
-trace that looks clean for a trace that is correct.
-
-It does not cover production monitoring and alerting infrastructure, model
-*training* reproducibility, or how to score whether an agent's output was
-actually right — that last question needs an evaluation framework, and a trace
-only tells you what the agent did, not whether it should have.

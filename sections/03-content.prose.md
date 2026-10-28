@@ -1,11 +1,7 @@
-# Content
-
 ## How it works: a trace is a tree of spans
 
-The unit of observability is the **span**: one step of execution — an LLM
-call, a tool call, a sub-agent invocation — recorded with its inputs, its
-outputs, when it started and ended, and whatever metadata matters later (model
-name, sampling parameters, token counts, the tool's arguments). A **trace** is
+- The unit of observability is the **span**: one step of execution recorded with its inputs, its outputs, when it started and ended, and whatever metadata matters later (model name, sampling parameters, token counts, the tool's arguments).
+- A **trace** is
 the tree those spans form for one agent run: a root span for the run as a
 whole, with a child span for each step, nested to show which call happened
 inside which.
@@ -37,46 +33,72 @@ can be tested under the *same conditions* that produced the failure
 — the same tool responses, the same prompt, a model that behaves the same
 way in practice — not a guarantee of the identical output token for token.
 
-## Using it: diagnosing a failure from a trace
+# Demonstration
 
-A support agent searches internal docs, then drafts a reply. A user reports
-that it confidently cited a refund policy that does not exist. The final
-answer alone gives no way in. The trace does:
+## Capture and inspect the original run
 
-```text
-span: agent run                                     4.2s
-|- span: LLM call "plan"                             0.6s
-|    output: {"action": "search_docs", "query": "refund"}
-|- span: tool call "search_docs"                     0.5s
-|    query sent:    "refund"
-|    docs returned: [refund-policy-2019.md, returns-faq.md]
-|    ! refund-policy-2019.md was deprecated 8 months ago
-`- span: LLM call "draft reply"                      3.1s
-     output: cites refund-policy-2019.md as current
+**Terminal:** run once, then inspect the three records.
+
+```powershell
+python demo/run.py run --out demo/runs/class-original
 ```
 
-Read top to bottom, the fault is not in the drafting call at all — the model
-drafted a faithful summary of a document it was handed. The plan span's query
-was too broad, the search span returned a stale document because nothing
-scoped it to current policy, and the draft span had no way to know that. A
-log of only the final answer would show a hallucination; the trace shows a
-retrieval problem three steps upstream. That distinction is the entire reason
-to look at the trace instead of the output: it tells you which span to fix —
-here, the search step's query or its filtering — instead of leaving you to
-suspect the model itself.
+- `manifest.json`: five observations, seed 7, saved code/runtime.
+- `steps.jsonl`: five attempts, including one error.
+- `result.json`: `c003`, $x^2+1$, **MSE 0.0**.
 
-## Going further: replay as a regression test
+Use a fresh directory. Run every demo command from the **repository root**.
 
-Once a trace exists, it can do more than explain one run — the recorded tool
-response turns into a fixture. Take the span attributes from the failing
-trace above (the query, the stale document it returned) and replay the run
-from that point with a fix applied: filter search results to current
-documents before drafting. Re-running just the drafting span against the
-corrected input confirms the fix without re-paying for the planning call or
-depending on the live search index answering the same way twice. Stored this
-way, a trace from a real failure becomes a cheap, targeted regression test —
-the closest an agent gets to the deterministic unit test an ordinary function
-would get for free.
+::: {.detail}
+The Python demo needs Python 3.10 or later and only the standard library. It does not need WSL, Pandoc, or just. Execute each command individually; do not concatenate the examples into one invocation.
+
+Expected terminal output: `completed_with_errors: demo/runs/class-original/manifest.json`. This status records a completed search with one unsuccessful candidate; it is not a crash. The exit code is zero.
+
+Open `demo/runs/class-original/manifest.json`, `steps.jsonl`, and `result.json`. The result reports `attempted: 5`, `failed: 1`, and `best.candidate_id: c003`. The exact serialized winner is `((x) * (x)) + 1`.
+
+The demonstration directories were unused when this revision was prepared. If any exists before presenting, choose a new common suffix for all three paths and every reference; never overwrite or delete earlier run evidence.
+:::
+
+## Replay means evaluating again
+
+**2. Replay:** reevaluate with preserved inputs and code.
+
+```powershell
+python demo/run.py replay `
+  demo/runs/class-original/manifest.json `
+  --out demo/runs/class-replay
+```
+
+**3. Compare:** check the original against the new execution.
+
+```powershell
+python demo/run.py compare `
+  demo/runs/class-original `
+  demo/runs/class-replay
+```
+
+**PowerShell, repository root.** A backtick continues one command; run each block separately.
+
+::: {.detail}
+The backtick must be the final character on its line, with no trailing spaces. The presenter notes also provide each command on one line for copying. A continuation is formatting, not an extra command.
+
+Replay first validates dataset/configuration hashes, saved and executing source hashes, completed source-run status, and exact Python version. It regenerates candidates and recomputes their scores instead of copying old scores. The new manifest links to the source through `parent_run_id`.
+:::
+
+## Compare the replayed outcomes
+
+![](figures/replay-comparison.svg){width=100%}
+
+`match: true` · `compared_steps: 5` · exit code **0**.
+
+**Contract:** same experiment identity and ordered candidate outcomes. New run IDs and timing may differ.
+
+::: {.detail}
+The comparison checks dataset/configuration/code/runtime identity, ordered semantic step fields, and the result. It includes predictions, equations, errors, attempts, and candidate ancestry. Run/trace IDs, timestamps, durations, and result parent-run links describe the new execution and are excluded. Expected comparison: `match: true`, no differences, `compared_steps: 5`; exit code 0.
+
+The displayed scores are a summary, not the entire comparison. In particular, the matching error is part of the evidence. Live model calls have additional variability; exact replay of this offline example does not guarantee identical live responses.
+:::
+
 
 ## Pitfalls
 
