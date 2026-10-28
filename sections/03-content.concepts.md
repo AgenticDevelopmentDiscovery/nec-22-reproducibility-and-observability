@@ -21,6 +21,8 @@
 - Display all five commands in the deck; split S08 and S10 into command/result frames without changing the lesson's time budget.
 - Use executable PowerShell continuations at argument boundaries; keep one-line copies in presenter notes.
 - Retain detailed calculations and schema explanations in .detail blocks.
+- Distinguish four CLI operations from the internal loop; compare is used twice and reads recorded outcomes.
+- Define divergence and lineage in place; distinguish first difference from cause and equation parentage from span nesting.
 
 ## Open questions
 

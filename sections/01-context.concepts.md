@@ -10,8 +10,9 @@
 
 - Open with the concrete missing-actions problem and Q1 before terminology, as requested.
 - Separate the question from its answer with Beamer overlays; keep both in article/HTML.
-- Replace the former three-concept table with four concise definitions.
-- Keep the replay contract at replay, avoiding repetition in the opening.
+- Split S02 into logging/observability and S02-repeat into reproducibility/provenance, each with definition, demo example, and purpose.
+- Introduce the comparison contract as criteria for equivalent outcomes; apply its concrete fields at replay.
+- Define trace/span in detailed prose at first mention and on the lineage slide; avoid a separate glossary slide.
 
 ## Open questions
 

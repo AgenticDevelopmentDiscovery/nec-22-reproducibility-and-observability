@@ -32,32 +32,34 @@ Use the same interpreter throughout. This is an alternative to the command below
 
 ## Timing and navigation
 
-Stable IDs S01–S15 match the `#s01`–`#s15` source headings and website anchors. S08-results and S10-results hold the diagrams after their command frames. A PDF page is not the same as an instructional slide: a question/reveal uses two pages of one frame. The footer counts frames, so its number stays the same during a question's answer reveal.
+Stable IDs S01–S15 match the source headings and website anchors. S02-repeat completes the definitions; S04-attempts shows all five candidates; S08-results and S10-results hold the comparison diagrams. A PDF page is not the same as an instructional slide: a question/reveal uses two pages of one frame. The footer counts frames, so its number stays the same during a question's answer reveal.
 
-The verified 23-page PDF navigation is: Q1 pages 2–3, Q2 pages 7–8, Q3 pages 13–14, and Q4 pages 17–18. The first page of each pair asks; the next reveals. Commands 1, 2–3, and 4–5 are on pages 10, 11, and 15. Results follow on pages 12 and 16. Title is page 1, closing takeaway page 22, and references page 23.
+The 25-page PDF navigation is: Q1 pages 2–3, Q2 pages 9–10, Q3 pages 15–16, and Q4 pages 19–20. The first page of each pair asks; the next reveals. Definitions are pages 4–5, Python workflow page 6, MSE page 7, and candidate progression page 8. Commands 1, 2–3, and 4–5 are on pages 12, 13, and 17. Results follow on pages 14 and 18. Title is page 1, closing takeaway page 24, and references page 25.
 
 | Time | Slide ID | Teaching purpose |
 | --- | --- | --- |
-| 0:00–0:20 | Title | Introduce the investigation |
-| 0:20–2:00 | S01 | Correct output versus evidence; Q1 |
-| 2:00–2:40 | S02 | Distinguish the four concepts |
-| 2:40–3:20 | S03 | Propose/evaluate/select workflow |
-| 3:20–4:05 | S04 | Dataset and MSE |
-| 4:05–4:35 | S05 | What the winner omits; Q2 |
-| 4:35–5:00 | S06 | Three complementary records |
-| 5:00–6:30 | S07 | Original execution and inspection |
-| 6:30–7:40 | S08 | Show and run replay and comparison commands |
-| 7:40–8:00 | S08-results | Interpret five matching evaluations |
-| 8:00–9:00 | S09 | Predict MSE; Q3 |
-| 9:00–10:30 | S10 | Show and run modification and comparison commands |
-| 10:30–11:00 | S10-results | Interpret the first divergence |
-| 11:00–12:05 | S11 | Preserve a failed attempt; Q4 |
-| 12:05–13:00 | S12 | Candidate/run/span relationships |
-| 13:00–13:35 | S13 | Transfer to live agents |
-| 13:35–14:20 | S14 | Coding and engineering applications |
-| 14:20–15:00 | S15 | Close with the evidence checklist |
+| 0:00–0:15 | Title | Introduce the investigation |
+| 0:15–1:15 | S01 | Correct output versus evidence; Q1 |
+| 1:15–1:45 | S02 | Logging and observability |
+| 1:45–2:15 | S02-repeat | Reproducibility and provenance |
+| 2:15–2:45 | S03 | Python search and recording lifecycle |
+| 2:45–3:10 | S04 | Dataset and MSE |
+| 3:10–3:45 | S04-attempts | Five attempts and incumbent decisions |
+| 3:45–4:15 | S05 | What the winner omits; Q2 |
+| 4:15–4:45 | S06 | Complementary records, JSONL, and hashes |
+| 4:45–6:50 | S07 | 35-second Python recap; original run/inspection from 5:20 |
+| 6:50–8:00 | S08 | Show and run replay and comparison commands |
+| 8:00–8:20 | S08-results | Interpret five matching evaluations |
+| 8:20–9:20 | S09 | Predict MSE; Q3 |
+| 9:20–10:50 | S10 | Show and run modification and comparison commands |
+| 10:50–11:20 | S10-results | Interpret the first divergence |
+| 11:20–12:20 | S11 | Preserve a failed attempt; Q4 |
+| 12:20–13:15 | S12 | Candidate/run/span relationships |
+| 13:15–13:40 | S13 | Transfer to live agents |
+| 13:40–14:25 | S14 | Coding and engineering applications |
+| 14:25–15:00 | S15 | Close with the evidence checklist |
 
-This schedule includes about 80 seconds for student responses. It is a pacing estimate, **not a completed timed rehearsal**. The highest overrun risks are navigating JSON files and extending discussion. Collect one or two responses, point to preselected fields, and skip the optional closing question if behind. References are available after the closing slide; do not read them aloud.
+This schedule includes about 80 seconds for student responses. It is a pacing estimate, **not a completed timed rehearsal**. The expanded preparation block is the main new risk: keep the definitions to one example each and do not narrate every schema field. Original execution/replay retain three minutes of live time, and prediction/divergence retain three minutes. Shorter opening and closing commentary make room for the definitions and recap. File navigation and extended discussion can still cause overruns. Collect one or two responses, point to preselected fields, and omit optional explanations if behind. References are available after the closing slide; do not read them aloud.
 
 ## Optional cleanup of disposable practice outputs
 
@@ -69,13 +71,13 @@ Remove-Item -Recurse -Force demo/runs/class-original, demo/runs/class-replay, de
 
 Do not run it on records you want to keep. Do not delete the entire `demo` directory. This cleanup is documentation only: it is never run by the demo or build, and it was not executed during this refinement. Existing outputs must not be deleted or overwritten without your explicit choice.
 
-## Title — 0:00–0:20
+## Title — 0:00–0:15
 
 **Point:** This is an investigation of a run, not a claim about the power of a search algorithm.
 
 **Say:** “An agent can return a convincing answer while leaving us unsure what actually happened. We'll run a small equation search, repeat it, and then change one input to see what its records tell us.”
 
-## S01 — A correct answer is only the beginning — 0:20–2:00
+## S01 — A correct answer is only the beginning — 0:15–1:15
 
 Introduce the missing-intermediate-actions problem. **Do not advance to the answer page yet.**
 
@@ -87,33 +89,53 @@ Introduce the missing-intermediate-actions problem. **Do not advance to the answ
 
 **Transition:** “Let's separate four ideas that help answer those questions.”
 
-## S02 — Four ideas, four different jobs — 2:00–2:40
+## S02 — Logging records; observability investigates — 1:15–1:45
 
 **Point:** Logging produces records; observability is what connected evidence lets us investigate.
 
-**Say:** “Logging records an event. Observability lets us connect events to a run and its inputs so we can investigate behavior. Reproducibility asks whether we can repeat the execution under a defined comparison rule. Provenance tells us where a result came from.”
+**Terms:** Logging records events, inputs, outputs, scores, errors, and metadata. Observability is the ability to investigate internal behavior using connected evidence.
 
-Use one contrast: “Candidate failed” versus “candidate c004, in this run, failed at this input.” Avoid suggesting more logs automatically produce observability.
+**Say:** “Logging saves what happened—for example, equation c004 failed with division by zero. Observability lets us connect that failure to the equation, input, and run so we can investigate it. Lots of disconnected log lines would not answer those questions.”
 
-## S03 — Propose, evaluate, select — 2:40–3:20
+**Optional definitions:** A trace connects related execution operations; a span records one operation; metrics summarize quantities such as failure counts. Return to trace/span relationships at S12.
 
-**Point:** Explain the diagram before file formats.
+## S02-repeat — Reproducibility verifies; provenance explains origins — 1:45–2:15
 
-**Say:** “Symbolic regression searches for an equation that fits data. The proposer suggests an equation, the harness evaluates it, and MSE determines whether it becomes our incumbent—the best valid equation so far.”
+**Terms:** Reproducibility repeats an experiment using preserved inputs/code/settings and appropriate execution conditions, then verifies agreed outcomes. The comparison contract is that agreement. Provenance records a result's origin and history.
 
-Follow the arrows, including feedback. “This proposer follows fixed rules plus a seeded mutation. It isn't calling an LLM. That makes the recording method easier to see.”
+**Say:** “Reproducibility checks a new execution: do all five evaluations match our rules? New timestamps are allowed. Provenance looks backward: which inputs and code produced the winner, and which earlier equations led to it?”
 
-## S04 — What does a better fit mean? — 3:20–4:05
+**Spoken summary:** “Logging records what happened. Observability helps us investigate it. Reproducibility helps us repeat and verify it. Provenance explains where results came from.”
+
+## S03 — How Does Our Python Agent Work? — 2:15–2:45
+
+**Point:** Explain the actual Python loop and when it records evidence.
+
+**Terms:** Symbolic regression searches for an equation fitting observations. A candidate is a proposed equation; the incumbent is the best valid one found so far. Evaluation produces predictions and a score or failure. A rule-based agent follows programmed proposal and selection rules.
+
+**Say:** “We search for an equation that fits five observations. Python saves the inputs and source, then proposes, evaluates, keeps the best valid equation, and logs every attempt. That best equation feeds the next proposal. After five attempts it saves the winner and final status.”
+
+**Optional implementation detail:** Seed 7 initializes a repeatable pseudorandom sequence for the final offset. The candidate budget is the maximum number of attempts: five. Execution is serial, with no retries or external API. Deterministic means the same relevant behavior under controlled inputs/code/runtime; it does not mean identical IDs or timestamps. `proposal()` chooses the equation, `evaluate()` computes its values, and `run()` scores, selects, and records. The input manifest is written before the loop, steps are flushed during it, and result/status are finalized afterward.
+
+## S04 — What does a better fit mean? — 2:45–3:10
 
 **Point:** MSE measures fit to five recorded observations.
 
-**Say:** “For each input, compare the equation's prediction with the observed target, square the difference, and average over five points. Lower is better. Our first three equations score 13.8, 1.0, and zero.”
+**Say:** “MSE is the average squared difference between predictions and observations. For each of these five inputs, subtract the observed target from the prediction, square that difference, and average. Lower means a better fit.”
 
-Point to $x^2+1$. “Zero means it fits these points exactly. It doesn't establish accuracy on unseen data.”
+Point to the equation. “Zero means a perfect fit to these points; it doesn't guarantee accuracy on unseen data.”
 
 **Calculation backup, not spoken by default:** For $x$, residuals are $[-7,-3,-1,-1,-3]$; squares sum to 69, so MSE is 13.8. For $x^2$, five residuals of minus one give MSE 1.0.
 
-## S05 — What would the winner leave out? — 4:05–4:35
+## S04-attempts — Five attempts; keep the best valid equation — 3:10–3:45
+
+**Point:** The algorithm retains the best valid candidate, not the latest attempt.
+
+**Say:** “x becomes the first incumbent. Squaring it reduces MSE from 13.8 to 1. Adding one reaches zero, so c003 becomes best. The reciprocal fails and cannot replace it. Seed 7 chooses a final offset of plus one: x squared plus two scores one and also loses. We finish all five attempts, but keep c003.”
+
+Point down the incumbent column. The exact winning source expression is `((x) * (x)) + 1`; c005 is `(((x) * (x)) + 1) + (1)`. Save detailed failure fields for Q4. No terminal switch yet.
+
+## S05 — What would the winner leave out? — 3:45–4:15
 
 **Ask Q2 before the demo:** “An agent evaluates five candidate equations. If we only save the winning equation, what information could we lose?” Keep the answer page hidden. Wait **15–20 seconds**, taking one or two responses.
 
@@ -121,15 +143,23 @@ Point to $x^2+1$. “Zero means it fits these points exactly. It doesn't establi
 
 **Reveal:** Advance one page. “All of those matter. We need the experiment, the execution history, and the result together.”
 
-## S06 — One experiment, three complementary records — 4:35–5:00
+## S06 — One experiment, three complementary records — 4:15–4:45
 
 **Point:** Three kinds of evidence share a run ID.
 
 **Say:** “The manifest records the experiment's inputs and settings; steps.jsonl records each evaluation; result.json records the selection and counts. These lines mean the files belong to the same run—not that the files are three computational stages.”
 
-Explain JSONL in one sentence: “It's one JSON object per line, one per candidate here.” Point to the saved source: “Hashes identify content; the snapshots let us recover it.”
+**Terms:** A manifest describes inputs, settings, code identity, runtime, and run status. JSONL means one JSON record per line. A hash is a computed fingerprint for checking content.
 
-## S07 — Capture and inspect the original run — 5:00–6:30
+Explain JSONL in one sentence: “It's one JSON object per line, one per candidate here.” Point to the saved source: “Hashes identify content; agent.py preserves the actual source.” The three records are associated with a run, not sequential algorithm stages.
+
+## S07 — Capture and inspect the original run — 4:45–6:50
+
+**Before switching to the terminal, give this 30–45-second recap (target 35 seconds):**
+
+“This demonstration uses a simplified symbolic-regression agent written in Python. It begins with five data points and proposes equations to fit them. Each equation is evaluated using mean squared error, and the program remembers the best valid equation found so far. New candidates follow programmed rules and the current best result. Throughout the search, it records inputs, evaluations, failures, and the final result so we can repeat the experiment and investigate differences.”
+
+**CLI distinction:** `run`, `replay`, and `corrupt` execute searches; `compare` checks saved evidence. Five live commands use four operations because we compare twice. Mention each operation's purpose as it appears rather than reading this list aloud now. Start command 1 by **5:20**, preserving 90 seconds for execution and inspection.
 
 **Show command 1 on S07, then switch to the terminal.** Stay at the repository root.
 
@@ -161,7 +191,7 @@ Exit code: **0**. The run completed and retained a failed candidate.
 
 **Return to S08.**
 
-## S08 — Replay means evaluating again — 6:30–7:40
+## S08 — Replay means evaluating again — 6:50–8:00
 
 **Point:** The comparison includes intermediate outcomes, not only the winner.
 
@@ -211,7 +241,7 @@ Exit code: **0**. Show this terminal result; it is the shortest useful evidence.
 
 **Return to S08-results.**
 
-## S08-results — Compare the replayed outcomes — 7:40–8:00
+## S08-results — Compare the replayed outcomes — 8:00–8:20
 
 **Point:** Interpret the successful comparison using the two rows of the diagram.
 
@@ -219,7 +249,7 @@ Exit code: **0**. Show this terminal result; it is the shortest useful evidence.
 
 **Return to the question-only page of S09. Do not run the modification yet.**
 
-## S09 — Predict the effect of changing one target — 8:00–9:00
+## S09 — Predict the effect of changing one target — 8:20–9:20
 
 **Ask Q3:** “At x equals minus two, the equation predicts five. If the observed target becomes six, what happens to MSE?” Keep the reveal hidden for **20–25 seconds**.
 
@@ -231,7 +261,7 @@ Exit code: **0**. Show this terminal result; it is the shortest useful evidence.
 
 **Advance to S10, point to command 4, and switch to the terminal.**
 
-## S10 — Change one observation, then compare — 9:00–10:30
+## S10 — Change one observation, then compare — 9:20–10:50
 
 **Command 4 — deliberate input modification**
 
@@ -269,15 +299,17 @@ Exit code **1 is intentional and expected**. If needed, `$LASTEXITCODE` immediat
 
 **Show:** The terminal's `first_step_difference`, then return to S10-results.
 
-## S10-results — Locate the first divergence — 10:30–11:00
+## S10-results — Locate the first divergence — 10:50–11:20
 
 **Point:** Use the side-by-side diagram to distinguish a shared winning equation from equivalent executions.
+
+**Term:** Divergence is a detected difference under the comparison contract. A changed hash identifies different content; it does not alone establish why the content changed.
 
 **Say:** “Even before the winner, the very first score differs. Predictions for x stayed the same; the recorded target changed. The report locates the divergence, and the manifest's recorded intervention explains the cause.”
 
 **Math backup:** The first candidate's first squared residual changes from 49 to 64. Its mean increases by 15/5 = 3. The changed $x^2$ scores 1.6 and the final offset candidate scores 0.8, both worse than 0.2.
 
-## S11 — What should happen to a failed candidate? — 11:00–12:05
+## S11 — What should happen to a failed candidate? — 11:20–12:20
 
 **Ask Q4 before inspecting the failure:** “The agent tries one over x, but our dataset includes zero. What should happen to the failed attempt?” Wait **15–20 seconds** on the question page.
 
@@ -291,9 +323,11 @@ Exit code **1 is intentional and expected**. If needed, `$LASTEXITCODE` immediat
 
 **Return to S12.** Mention that retry limit is zero; do not claim a timeout implementation.
 
-## S12 — Trace the winner to its origin — 12:05–13:00
+## S12 — Trace the winner to its origin — 12:20–13:15
 
 **Point:** Ancestry and operation nesting answer different questions.
+
+**Terms:** Lineage links results to parent candidates or source runs. A trace connects operations in one execution; a span records a unit of work, here one candidate evaluation. These evaluations are sibling spans under the run, even where their equations have parent-child relationships. The demo has a local educational schema, not an OpenTelemetry exporter.
 
 **Say:** “The winner c003 comes from c002, which comes from c001. These arrows are parent to child; the records store the reverse lookup as parent_candidate_id.”
 
@@ -303,19 +337,19 @@ Keep the SVG visible. If the editor is already open, briefly point to `c002.pare
 
 The diagram includes a note about c005 and independent c004 so students do not mistake a three-node winner chain for all five attempts.
 
-## S13 — Carry the evidence into a live agent — 13:00–13:35
+## S13 — Carry the evidence into a live agent — 13:15–13:40
 
 **Say:** “For a live agent, record the visible requests and responses, tool calls, retrieved content, and environment. Define what counts as the same result before comparing. A seed alone doesn't control every external dependency.”
 
 Distinguish recorded-response replay from another live model call. Mention that a distributional claim requires repeated runs and a chosen metric/tolerance; do not introduce a statistical methods lecture.
 
-## S14 — Where would you use these records? — 13:35–14:20
+## S14 — Where would you use these records? — 13:40–14:25
 
 **Say:** “For a coding agent, link tool calls and code revisions to tests and failed attempts: which edit broke the tests? For a simulation agent, preserve material properties, input files, model versions, solver settings, and results: did the inputs or solver change?”
 
 “These are the same questions as our toy search, but a production system also needs retention, access control, and interrupted-run handling.”
 
-## S15 — Keep the evidence, not just the winner — 14:20–15:00
+## S15 — Keep the evidence, not just the winner — 14:25–15:00
 
 Point to the three checks: preserve inputs/code, compare execution outcomes, keep failures and origins.
 
@@ -324,3 +358,16 @@ Point to the three checks: preserve inputs/code, compare execution outcomes, kee
 **Closing statement:** “The answer tells us what the agent produced. The records help us investigate how it got there, repeat the execution, and explain why another run differs.”
 
 Leave references available after the final slide for questions. Do not spend the last minute reading URLs.
+
+## Optional short explanations for questions afterward
+
+| Distinction | Natural explanation |
+| --- | --- |
+| Logging / observability | Logging saves events; connected evidence lets us investigate them. |
+| Reproducibility / identical output | Matching winners is one observation; reproducibility verifies the required execution outcomes. IDs and times may differ. |
+| Provenance / candidate ancestry | Candidate parents are one part of provenance, alongside input, code, configuration, and run origins. |
+| Rule-based / LLM agent | This Python proposer follows programmed rules and a seeded offset; it makes no model call. |
+| Manifest / evaluation log | The manifest describes the experiment; the log records each attempted evaluation. |
+| Replay / copied results | Replay recalculates predictions and scores; copying them would not test execution. |
+
+These are backup explanations, not additional timed presentation segments.

@@ -2,7 +2,7 @@
 
 ## Capture and inspect the original run {#s07}
 
-**Terminal:** run once, then inspect the three records.
+**1. Run:** execute a new five-candidate search and save its evidence.
 
 ```powershell
 python demo/run.py run --out demo/runs/class-original
@@ -17,6 +17,8 @@ Use a fresh directory. Run every demo command from the **repository root**.
 ::: {.detail}
 The Python demo needs Python 3.10 or later and only the standard library. It does not need WSL, Pandoc, or just. Execute each command individually; do not concatenate the examples into one invocation.
 
+The command-line interface selects an operation; it is distinct from the search loop inside the program. `run` starts a new search, `replay` validates and repeats a saved experiment, `corrupt` validates and reruns with one recorded target change, and `compare` examines existing records without performing a new search. There are four operations but five demonstration commands because we compare twice.
+
 Expected terminal output: `completed_with_errors: demo/runs/class-original/manifest.json`. This status records a completed search with one unsuccessful candidate; it is not a crash. The exit code is zero.
 
 Open `demo/runs/class-original/manifest.json`, `steps.jsonl`, and `result.json`. The result reports `attempted: 5`, `failed: 1`, and `best.candidate_id: c003`. The exact serialized winner is `((x) * (x)) + 1`.
@@ -26,7 +28,7 @@ The demonstration directories were unused when this revision was prepared. If an
 
 ## Replay means evaluating again {#s08}
 
-**2. Replay:** reevaluate with preserved inputs and code.
+**2. Replay:** validate, then reexecute with saved inputs and code.
 
 ```powershell
 python demo/run.py replay `
@@ -34,7 +36,7 @@ python demo/run.py replay `
   --out demo/runs/class-replay
 ```
 
-**3. Compare:** check the original against the new execution.
+**3. Compare:** check recorded evaluations, failures, and result.
 
 ```powershell
 python demo/run.py compare `
@@ -56,7 +58,7 @@ Replay first validates dataset/configuration hashes, saved and executing source 
 
 `match: true` · `compared_steps: 5` · exit code **0**.
 
-**Contract:** same experiment identity and ordered candidate outcomes. New run IDs and timing may differ.
+**Comparison contract:** criteria for equivalent outcomes—same experiment identity and ordered evaluations. New run IDs and timing may differ.
 
 ::: {.detail}
 The comparison checks dataset/configuration/code/runtime identity, ordered semantic step fields, and the result. It includes predictions, equations, errors, attempts, and candidate ancestry. Run/trace IDs, timestamps, durations, and result parent-run links describe the new execution and are excluded. Expected comparison: `match: true`, no differences, `compared_steps: 5`; exit code 0.
@@ -99,7 +101,7 @@ A score is relative to the observations used to compute it. The equation is stil
 
 ## Change one observation, then compare {#s10}
 
-**4. Modify:** change the first target from 5 to 6 in a new run.
+**4. Corrupt:** record target 5 → 6 and rerun; keep the original.
 
 ```powershell
 python demo/run.py corrupt `
@@ -125,9 +127,9 @@ Despite its command name, `corrupt` creates a deliberate, recorded experiment. I
 
 ![](figures/controlled-divergence.svg){width=100%}
 
-**Same winner, different execution evidence.** First difference: step 1, input fingerprint and score.
+**Divergence:** a difference under our comparison criteria. First difference: step 1, input fingerprint and score.
 
-Exit code **1 is the expected mismatch**, not an agent crash.
+The recorded target change explains it. Same winner; exit code **1 is the expected mismatch**, not a crash.
 
 ::: {.detail}
 The first difference is candidate `c001` at step 1: `inputs.dataset_hash` changes and MSE moves from 13.8 to 16.8. The $x$ predictions stay unchanged. The changed target makes its first squared residual 64 instead of 49, increasing the mean by $15/5=3$.
@@ -177,13 +179,15 @@ There are no retries or implemented timeouts in this example. A production syste
 
 ## Trace the winner to its origin {#s12}
 
+**Lineage:** links to parent candidates or source runs.
+
 ![](figures/equation-lineage.svg){width=100%}
 
 - **Candidate ancestry:** which equation was mutated?
 - **Run ancestry:** which recorded run was replayed or modified?
-- **Trace/span nesting:** which run contained an evaluation?
+- **Trace:** connected operations in a run; **span:** one unit of work.
 
-The result's candidate ID connects the winner to this evidence. [@w3cprov; @oteltraces]
+Equation parentage does not imply nested spans. [@w3cprov; @oteltraces]
 
 ::: {.detail}
 The arrows run from parent to child. The actual records show `c002.parent_candidate_id = c001` and `c003.parent_candidate_id = c002`. The final `c005` is another child of `c003`; it loses. Candidate `c004` is an independent reciprocal proposal with no candidate parent.

@@ -34,7 +34,7 @@ The five editable SVG assets use a restrained teal/gray palette and large labels
 
 | Asset | Teaching purpose |
 | --- | --- |
-| `agent-workflow.svg` | Propose, evaluate, score, select, and feed back the incumbent |
+| `agent-workflow.svg` | Save inputs/source before search; propose, evaluate, score, keep best, log, and repeat; finalize result/status afterward |
 | `experiment-records.svg` | Three complementary records associated with one run, not file execution stages |
 | `replay-comparison.svg` | All five recomputed candidate outcomes, including the matching failure |
 | `controlled-divergence.svg` | One changed target, first score divergence, same winning equation |

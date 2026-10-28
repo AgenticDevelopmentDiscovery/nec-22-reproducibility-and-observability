@@ -2,7 +2,7 @@
 title: "Reproducibility, Logging & Observability for Agent Runs"
 subtitle: "Tutorial 22: replay a search, explain a divergence, trace a result"
 # Author names are omitted until supplied by the team.
-date: "2026-10-27"
+date: "2026-10-28"
 reference-section-title: References
 audience: >-
   ENGR 689 students who can read basic Python and JSON but are unfamiliar with

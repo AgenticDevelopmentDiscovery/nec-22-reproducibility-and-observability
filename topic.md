@@ -16,6 +16,7 @@ Agentic search combines proposal generation with tool-based evaluation, so an un
 
 - Identify uncontrolled inputs in a model/tool/retrieval loop.
 - Distinguish logging from observability, reproducibility, and provenance.
+- Explain the Python agent's proposal/evaluation/selection loop and why the last candidate need not win.
 - Capture a manifest containing configuration, dataset snapshot, hashes, code, and runtime identity.
 - Re-execute the included agent and compare ordered candidate outcomes.
 - Locate the first divergent evaluation after a deliberate dataset change.
@@ -41,16 +42,17 @@ Agentic search combines proposal generation with tool-based evaluation, so an un
 
 ## Shape
 
-- Introduction and Q1: 2 minutes; missing evidence before technical terms.
-- Concepts, workflow, MSE, Q2, and artifacts: 3 minutes.
-- Original execution and replay: 3 minutes.
+- Introduction and Q1: 1 minute 15 seconds; missing evidence before technical terms.
+- Definitions, workflow, MSE, all five attempts, Q2, and records: 3 minutes 30 seconds.
+- Python recap immediately before execution: 35 seconds.
+- Original execution and replay: 3 minutes of live demonstration.
 - MSE prediction (Q3) and controlled divergence: 3 minutes.
-- Failed-candidate question (Q4) and provenance: 2 minutes.
-- Live-agent transfer, coding/simulation applications, and conclusion: 2 minutes.
-- Preserve four source pairs and 17 substantive headings, including two short command frames. The second pair prepares the experiment; the first pair opens with motivation.
+- Failed-candidate question (Q4) and provenance: 1 minute 55 seconds.
+- Live-agent transfer, coding/simulation applications, and conclusion: 1 minute 45 seconds.
+- Preserve four source pairs and 19 substantive headings. Two added frames separate paired definitions and candidate progression; the existing command frames remain intact.
 - Four question/answer overlays; suppress section-divider pages to keep navigation short.
 - `.detail` blocks keep supplementary calculations and schema explanations in the document/website. All five commands appear in the slides. A small Lua filter handles output differences.
-- Stable S01–S15 IDs, plus S08-results and S10-results, connect the manuscript to complete presenter notes. Keep all demo commands at the repository root.
+- Stable S01–S15 IDs, plus S02-repeat, S04-attempts, S08-results, and S10-results, connect the manuscript to complete presenter notes. Keep all demo commands at the repository root.
 
 ## Open questions
 

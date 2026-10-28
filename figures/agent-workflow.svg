@@ -1,21 +1,28 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="230" viewBox="0 0 1100 230" role="img" aria-labelledby="title desc">
-<title id="title">Rule-based symbolic regression loop</title><desc id="desc">Propose a candidate, evaluate predictions, score MSE or error, select the best valid incumbent, and feed back to the next proposal.</desc>
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="350" viewBox="0 0 1100 350" role="img" aria-labelledby="title desc">
+<title id="title">Python agent execution and recording lifecycle</title>
+<desc id="desc">Initialize with five observations and seed 7, saving inputs and source before the search. Propose an equation, evaluate predictions, calculate MSE or retain failure information, update the best valid incumbent, and log the attempt. Feed the incumbent into the next proposal until five attempts are complete. Then save the selected result and finalize run status.</desc>
 <defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8 Z" fill="#315a63"/></marker></defs>
-<rect width="1100" height="230" fill="#ffffff"/>
-<g font-family="DejaVu Sans, sans-serif" font-size="29" fill="#23383d"><rect x="15" y="25" width="230" height="100" rx="7" fill="#f2f6f6" stroke="#315a63" stroke-width="2"/>
-<text x="130" y="65" text-anchor="middle" font-weight="bold">Propose</text>
-<text x="130" y="102" text-anchor="middle" font-size="23">candidate equation</text>
-<line x1="250" y1="75" x2="288" y2="75" stroke="#315a63" stroke-width="2.5" marker-end="url(#arrow)"/>
-<rect x="295" y="25" width="230" height="100" rx="7" fill="#f2f6f6" stroke="#315a63" stroke-width="2"/>
-<text x="410" y="65" text-anchor="middle" font-weight="bold">Evaluate</text>
-<text x="410" y="102" text-anchor="middle" font-size="23">predicted values</text>
-<line x1="530" y1="75" x2="568" y2="75" stroke="#315a63" stroke-width="2.5" marker-end="url(#arrow)"/>
-<rect x="575" y="25" width="230" height="100" rx="7" fill="#f2f6f6" stroke="#315a63" stroke-width="2"/>
-<text x="690" y="65" text-anchor="middle" font-weight="bold">Score</text>
-<text x="690" y="102" text-anchor="middle" font-size="23">MSE or error</text>
-<line x1="810" y1="75" x2="848" y2="75" stroke="#315a63" stroke-width="2.5" marker-end="url(#arrow)"/>
-<rect x="855" y="25" width="230" height="100" rx="7" fill="#f2f6f6" stroke="#315a63" stroke-width="2"/>
-<text x="970" y="65" text-anchor="middle" font-weight="bold">Select</text>
-<text x="970" y="102" text-anchor="middle" font-size="23">keep best valid</text>
-<path d="M970 130 V175 H130 V133" fill="none" stroke="#315a63" stroke-width="2.5" marker-end="url(#arrow)"/><text x="550" y="212" text-anchor="middle" font-size="25">Incumbent and recorded seed guide the next proposal</text>
+<rect width="1100" height="350" fill="#ffffff"/>
+<g font-family="DejaVu Sans, sans-serif" fill="#23383d" text-anchor="middle">
+<text x="550" y="35" font-size="28">Initialize: five observations, seed 7; save inputs + source</text>
+<path d="M112 48 V90" fill="none" stroke="#315a63" stroke-width="2.5" marker-end="url(#arrow)"/>
+<g fill="#f2f6f6" stroke="#315a63" stroke-width="2">
+<rect x="15" y="100" width="195" height="95" rx="7"/>
+<rect x="235" y="100" width="195" height="95" rx="7"/>
+<rect x="455" y="100" width="195" height="95" rx="7"/>
+<rect x="675" y="100" width="195" height="95" rx="7"/>
+<rect x="895" y="100" width="190" height="95" rx="7"/>
+</g>
+<g font-size="29" font-weight="bold">
+<text x="112" y="138">Propose</text><text x="332" y="138">Evaluate</text><text x="552" y="138">Score</text><text x="772" y="138">Keep best</text><text x="990" y="138">Log</text>
+</g>
+<g font-size="25">
+<text x="112" y="176">equation</text><text x="332" y="176">predictions</text><text x="552" y="176">MSE / failure</text><text x="772" y="176">if improved</text><text x="990" y="176">each attempt</text>
+</g>
+<g fill="none" stroke="#315a63" stroke-width="2.5" marker-end="url(#arrow)">
+<path d="M213 147 H230"/><path d="M433 147 H450"/><path d="M653 147 H670"/><path d="M873 147 H890"/>
+<path d="M990 200 V235 H112 V202"/>
+</g>
+<text x="550" y="275" font-size="26">Best valid equation feeds the next proposal; stop after five attempts.</text>
+<text x="550" y="332" font-size="28">Finish: save the selected result and finalize run status</text>
 </g></svg>

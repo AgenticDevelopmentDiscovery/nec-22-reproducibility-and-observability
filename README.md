@@ -14,6 +14,7 @@ A 15-minute ENGR 689 tutorial with a runnable offline symbolic-regression agent.
 - [Observed verification results](demo/verification.md)
 - [Refinement assessment and teaching decisions](docs/refinement-review.md)
 - [Final command-slide review](docs/finalization-review.md)
+- [Terminology and Python-workflow review](docs/educational-review-20261028.md)
 
 Each section's `.concepts.md` companion records claims, decisions, and open questions. The prose is shared by the document, presentation, and website; each `##` heading becomes a slide. Bibliography entries live in `references.bib`.
 
@@ -73,7 +74,7 @@ The slide metadata uses the Metropolis Beamer theme. Confirm it is installed wit
 | `just build` | All three |
 | `just serve` | Website preview at localhost:8000 |
 
-The revised deck has **17 instructional frames**, including two short command frames, with four additional answer-reveal pages. All five live commands are visible: original execution on S07, replay/comparison on S08, and controlled change/comparison on S10. The result diagrams follow on S08-results and S10-results. It omits standalone section-divider pages while retaining the Metropolis theme. See [verification](demo/verification.md) for the final PDF page counts and inspection results. Inspect the slides again after future edits; the build itself does not reject overfull frames.
+The revised deck has **19 instructional frames**, with four additional answer-reveal pages. Definitions now span S02 and S02-repeat; S03 explains the Python loop and recording lifecycle; S04-attempts follows all five incumbent decisions. All five live commands remain visible: original execution on S07, replay/comparison on S08, and controlled change/comparison on S10. The result diagrams follow on S08-results and S10-results. It omits standalone section-divider pages while retaining the Metropolis theme. See [verification](demo/verification.md) for the final PDF page counts and inspection results. Inspect the slides again after future edits; the build itself does not reject overfull frames.
 
 Installed versions: `just 1.58.0`, `pandoc 3.11`, and XeLaTeX from TeX Live 2019 (Ubuntu 20.04). The Metropolis theme currently uses fallback fonts because its optional Fira fonts are absent; the PDFs render successfully.
 
@@ -81,7 +82,7 @@ Installed versions: `just 1.58.0`, `pandoc 3.11`, and XeLaTeX from TeX Live 2019
 
 ### Editing the shared manuscript
 
-Keep the existing `##` heading-to-slide structure. The source IDs `s01`–`s15`, `s08-results`, and `s10-results` match the presenter guide. `filters/tutorial.lua` provides three small output differences:
+Keep the existing `##` heading-to-slide structure. The source IDs `s01`–`s15`, `s02-repeat`, `s04-attempts`, `s08-results`, and `s10-results` match the presenter guide. `filters/tutorial.lua` provides three small output differences:
 
 - `.question` and `.answer` divisions occupy overlays 1 and 2 in Beamer. The article and website retain both in order.
 - `.detail` divisions provide supplementary explanations and calculations in the article and website, and are omitted from the slides. The five demo commands stay outside these divisions.

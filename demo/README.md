@@ -2,6 +2,23 @@
 
 This is a Python-standard-library demo: no packages, credentials, or network calls are needed. Use Python 3.10 or later. The five-candidate, rule-based agent adapts its proposals to its incumbent score; it is an offline teaching stand-in for an LLM proposer.
 
+## What the Python program does
+
+A candidate is an equation proposed for evaluation. The incumbent is the best valid equation found so far. `run()` saves the initial manifest and source snapshot, then repeats proposal, prediction, MSE calculation or error capture, incumbent selection, and step logging. It stops at the five-attempt budget, saves the result, and finalizes status. An invalid or worse candidate never replaces the incumbent.
+
+With seed 7, the attempts are `x` (13.8), `x²` (1.0), `x² + 1` (0.0), `1/x` (error), and `x² + 2` (1.0). The last proposal adds a seeded offset of +1 to incumbent `x² + 1`; c003 remains the winner. The seed initializes a repeatable pseudorandom sequence, and the proposer follows programmed rules rather than making LLM calls.
+
+The command-line interface selects what to do with the experiment:
+
+| Operation | Purpose |
+| --- | --- |
+| `run` | Start a new search and save its evidence |
+| `replay` | Validate the saved manifest, source identity, and required runtime; repeat using saved data/settings |
+| `compare` | Check two sets of recorded outcomes, including failures and result, while excluding expected ID/timing differences |
+| `corrupt` | Record a deliberate target change and execute a new run, preserving the original |
+
+There are four operations but five demonstration commands because comparison is used twice. The shell launches Python; the search logic is inside `demo/run.py`.
+
 ## Run the complete experiment
 
 Execute each command **individually from the repository root**. Each output directory must be new. These classroom names are reserved for presentation; validation uses separately named runs. No WSL, Pandoc, or just is required for this Python demo.
