@@ -109,9 +109,8 @@ personal data can leak; redact before you record, not after.
 
 **Instrumenting until no one reads it.** A span for every token or every retry
 produces a trace too large to read during an actual incident. Instrument at
-the grain a human will actually walk through — one span per LLM call and per
-tool call is usually right — and add finer detail only where a real failure
-has shown it is needed.
+the grain a human will actually walk through and add finer detail only where
+a real failure has shown it is needed.
 
 **Mistaking a clean trace for a correct one.** A trace shows what the agent
 did and confirms it ran without errors; it says nothing about whether the
