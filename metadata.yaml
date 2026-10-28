@@ -13,7 +13,7 @@ title: "Reproducibility and Observability for AI Agents"
 subtitle: "Making an agent's run re-creatable and its decisions inspectable"
 author:
   - Elias Lynch & Russell Oplinger
-date: \today
+date: "2026-10-28"
 
 # Where `--citeproc` puts the reference list. Without this the bibliography is
 # appended to the last section with no heading — and, in the slides, becomes an
@@ -40,6 +40,25 @@ audience: >-
 # --- Presentation only -------------------------------------------------------
 # Any beamer theme in TeX Live. Metropolis is clean and projects well.
 theme: metropolis
+themeoptions:
+  - sectionpage=none
+section-titles: false
+# Keep long article commands readable; older graphicx lacks Pandoc's alt key.
+# Preserve supported alt handling; the fallback affects only legacy PDF builds.
+header-includes:
+  - '\usepackage{fvextra}'
+  - |
+    ```{=latex}
+    \makeatletter
+    \@ifundefined{KV@Gin@alt}{\define@key{Gin}{alt}{}}{}
+    % Pandoc puts the title in a normal frame; fit the theme's title minipage
+    % to its text area with space for the normal frame's vertical padding.
+    \@ifclassloaded{beamer}{%
+      \expandafter\patchcmd\csname beamer@@tmpl@title page\endcsname
+        {\paperheight}{\dimexpr\textheight-2\baselineskip\relax}{}{}
+    }{}
+    \makeatother
+    ```
 aspectratio: 169
 
 # --- PDF outputs only --------------------------------------------------------
