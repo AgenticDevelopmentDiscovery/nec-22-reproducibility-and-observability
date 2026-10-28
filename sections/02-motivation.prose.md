@@ -86,7 +86,7 @@ We need complementary records of the **experiment, execution, and result**.
 This is an open-ended question: several answers are useful. Saving the winner alone cannot reconstruct the complete workflow. Saving only a log also leaves gaps if its input hashes refer to missing snapshots. The next diagram shows the three records used together.
 :::
 
-## One experiment, four complementary files {#s06}
+## One experiment, three complementary records {#s06}
 
 ![](figures/experiment-records.svg){width=100%}
 
@@ -94,7 +94,7 @@ This is an open-ended question: several answers are useful. Saving the winner al
 - **Steps (JSONL):** one JSON record per line, one per attempt.
 - **Result:** winner, score, attempted/failed counts, and run links.
 
-**`agent.py`:** saved source code. A **hash** fingerprints its content.
+**Hash:** a computed content fingerprint. **`agent.py`** preserves the source.
 
 ::: {.detail}
 The lines in the diagram associate records with the same run; they are not a pipeline that executes three files. A JSON file stores one structured object. A JSONL file stores one JSON object per line, so each candidate can be logged independently.

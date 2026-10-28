@@ -2,19 +2,17 @@
 
 ## Capture and inspect the original run {#s07}
 
-**1. Run:** propose and evaluate five equations; record the experiment.
+**1. Run:** execute a new five-candidate search and save its evidence.
 
 ```powershell
 python demo/run.py run --out demo/runs/class-original
 ```
 
-- `manifest.json`: experiment setup, data, and configuration.
-- `steps.jsonl`: candidate evaluations, scores, and failures.
-- `result.json`: winning equation and final result.
+- `manifest.json`: five observations, seed 7, saved code/runtime.
+- `steps.jsonl`: five attempts, including one error.
+- `result.json`: `c003`, $x^2+1$, **MSE 0.0**.
 
-**Best equation: $x^2+1$, MSE = 0.0.**
-
-Run commands from the **repository root**.
+Use a fresh directory. Run every demo command from the **repository root**.
 
 ::: {.detail}
 The Python demo needs Python 3.10 or later and only the standard library. It does not need WSL, Pandoc, or just. Execute each command individually; do not concatenate the examples into one invocation.
@@ -30,7 +28,7 @@ The demonstration directories were unused when this revision was prepared. If an
 
 ## Replay means evaluating again {#s08}
 
-**2. Replay**
+**2. Replay:** validate, then reexecute with saved inputs and code.
 
 ```powershell
 python demo/run.py replay `
@@ -38,7 +36,7 @@ python demo/run.py replay `
   --out demo/runs/class-replay
 ```
 
-**3. Compare**
+**3. Compare:** check recorded evaluations, failures, and result.
 
 ```powershell
 python demo/run.py compare `
@@ -46,7 +44,7 @@ python demo/run.py compare `
   demo/runs/class-replay
 ```
 
-Replay recalculates candidate evaluations. Compare checks whether the recorded outcomes match.
+**PowerShell, repository root.** A backtick continues one command; run each block separately.
 
 ::: {.detail}
 The backtick must be the final character on its line, with no trailing spaces. The presenter notes also provide each command on one line for copying. A continuation is formatting, not an extra command.
@@ -60,7 +58,7 @@ Replay first validates dataset/configuration hashes, saved and executing source 
 
 `match: true` · `compared_steps: 5` · exit code **0**.
 
-The replay reproduced the original evaluation history under the defined comparison contract.
+**Comparison contract:** criteria for equivalent outcomes—same experiment identity and ordered evaluations. New run IDs and timing may differ.
 
 ::: {.detail}
 The comparison checks dataset/configuration/code/runtime identity, ordered semantic step fields, and the result. It includes predictions, equations, errors, attempts, and candidate ancestry. Run/trace IDs, timestamps, durations, and result parent-run links describe the new execution and are excluded. Expected comparison: `match: true`, no differences, `compared_steps: 5`; exit code 0.
@@ -177,41 +175,4 @@ The first two inputs, $-2$ and $-1$, produce predictions $-0.5$ and $-1.0$. Eval
 The full record retains `candidate_id: c004`, `equation: 1 / x`, `parent_candidate_id: null`, run/trace/span IDs, input hashes, timing, and attempt number 1. These fields connect the failure to the particular experiment. A null score means no valid complete MSE was computed; assigning zero would falsely reward a failure.
 
 There are no retries or implemented timeouts in this example. A production system should record each retry separately and record timeout status, deadline, and any partial results. Completed-step logging alone cannot recover an operation killed before its final record.
-:::
-
-## Trace the winner to its origin {#s12}
-
-**Lineage:** links to parent candidates or source runs.
-
-![](figures/equation-lineage.svg){width=100%}
-
-- **Candidate ancestry:** which equation was mutated?
-- **Run ancestry:** which recorded run was replayed or modified?
-
-Equation parentage does not imply nested spans.
-
-::: {.detail}
-The arrows run from parent to child. The actual records show `c002.parent_candidate_id = c001` and `c003.parent_candidate_id = c002`. The final `c005` is another child of `c003`; it loses. Candidate `c004` is an independent reciprocal proposal with no candidate parent. [@w3cprov; @oteltraces]
-
-Run ancestry is different: the replay and changed manifests both identify the original run through `parent_run_id`. In the local trace schema, candidate operations are siblings with `parent_span_id: run`; mutation ancestry does not make one evaluation a nested span inside another.
-
-The demo uses a local educational trace schema, not an OpenTelemetry exporter. Input/configuration hashes and the saved source connect the result to its experiment. Provenance helps investigate a surprising winner but does not establish its scientific validity.
-:::
-
-## A trace connects the steps of an agent run {#s-trace}
-
-**Trace:** related operations in one execution. **Span:** one recorded unit of work.
-
-![Planning, search, and drafting share one run.](figures/trace-tree.svg){width=95%}
-
-Inspect the tool evidence before the final reply.
-
-::: {.detail}
-The trace/span structure follows OpenTelemetry's conceptual model. [@oteltraces]
-
-The support-agent example shows one root span for the request and child spans for the planning call, document-search tool, and drafting call. Each span can record start/end times, status, inputs, outputs, and relevant metadata: model identifier, sampling settings, tool arguments, returned document IDs, and response content when appropriate. The attributes box describes fields of the search span; it is not another child operation. Parent-child links show execution containment, not equation ancestry or proof of a causal dependency.
-
-For a concrete diagnostic exercise, suppose the response cites a refund policy that does not exist. Inspect the search query, retrieved document IDs/content, and what evidence the drafting call received. An irrelevant tool response suggests investigating retrieval; correct retrieved evidence followed by a false claim suggests investigating drafting or its prompt. The trace narrows the investigation, but evaluation must still establish which answer is correct. This is an illustrative scenario, not output from the offline Python demo.
-
-A targeted test can substitute a recorded tool response and rerun downstream code or prompts. That tests behavior against preserved evidence; calling the live tool again tests a different condition. Do not automatically repeat side-effecting actions such as sending messages or modifying external records. Neither this diagram nor the Python demo claims to implement a production tracing SDK.
 :::
