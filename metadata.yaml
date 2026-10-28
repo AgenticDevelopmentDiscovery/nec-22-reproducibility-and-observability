@@ -1,0 +1,49 @@
+# Shared project metadata. Every output reads this file (`--metadata-file`), so
+# it is the one place the title and authors are written down.
+#
+# Settings that mean the same thing everywhere go at the top. Settings only one
+# output understands are grouped below and labelled — a beamer theme is inert in
+# the document PDF and on the website, and that is fine, but it should be
+# obvious which is which. Anything that must DIFFER between outputs — page
+# geometry, document class — belongs in the `justfile` instead, not here.
+#
+# EDIT ALL OF THIS. Every value below is a placeholder.
+
+title: "Reproducibility and Observability for AI Agents"
+subtitle: "Making an agent's run re-creatable and its decisions inspectable"
+author:
+  - Russell Oplinger
+date: \today
+
+# Where `--citeproc` puts the reference list. Without this the bibliography is
+# appended to the last section with no heading — and, in the slides, becomes an
+# untitled final slide.
+reference-section-title: References
+
+# --- Read by the reviewer panel, not by pandoc -------------------------------
+#
+# `audience` is the standard the pedagogy reviewer judges against. It is the
+# highest-leverage field in this file: a vague audience produces vague review,
+# because the reviewer has nothing to hold the document to.
+#
+# Be specific. "Second-year undergraduates who have had one statistics course
+# but have never written code" is useful. "Technical readers" is not.
+
+audience: >-
+  Graduate engineering students (ENGR 689) who have already built at least one
+  LLM-based agent that calls tools — e.g., with an agent SDK or a hand-rolled
+  tool-calling loop — and are comfortable reading Python, but who have not yet
+  had to debug a multi-step agent failure they could not reproduce, or design
+  logging for one. They know what a stack trace is for ordinary code but have
+  not needed the analogous idea for a stochastic, multi-step system.
+
+# --- Presentation only -------------------------------------------------------
+# Any beamer theme in TeX Live. Metropolis is clean and projects well.
+theme: metropolis
+aspectratio: 169
+
+# --- PDF outputs only --------------------------------------------------------
+# Link colouring. The website takes its link colours from `site/style.css`.
+colorlinks: true
+linkcolor: NavyBlue
+urlcolor: NavyBlue
